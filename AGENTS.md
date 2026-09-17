@@ -46,6 +46,157 @@ Before changing anything:
 
 Do not create architecture, abstractions, documentation or agents unless they remove a demonstrated bottleneck or protect a real invariant.
 
+### 2.1 Karpathy-inspired reasoning discipline — adapted for OASIS
+
+OASIS adds an explicit reasoning discipline inspired by the engineering guidance in `multica-ai/andrej-karpathy-skills`. It complements Ponytail rather than duplicating it:
+
+- this section governs **how an agent resolves uncertainty, scope and success before implementation**;
+- Ponytail governs **how the chosen implementation stays minimal, correct and maintainable**.
+
+The objective is to prevent four recurring failure modes: silent assumptions, unnecessary complexity, drive-by edits and unverifiable completion.
+
+#### 2.1.1 Assumption control
+
+For every non-trivial task, establish a compact working contract before writing:
+
+```text
+goal
+known facts
+material assumptions
+important ambiguities
+chosen interpretation
+success criteria
+stop conditions
+```
+
+Rules:
+
+- distinguish **fact**, **inference** and **hypothesis**; never present one as another;
+- do not silently choose between materially different interpretations;
+- verify assumptions from repository/runtime evidence whenever possible;
+- if evidence conflicts, surface the conflict and preserve both sources until resolved;
+- if the requested approach is needlessly complex or conflicts with a stronger invariant, say so and use the simpler correct path;
+- never fabricate certainty to keep moving.
+
+#### 2.1.2 Ambiguity ladder — autonomous by default, escalation only when material
+
+Do not ask for clarification merely because something is imperfectly specified. Resolve uncertainty in this order:
+
+1. inspect live runtime/state;
+2. inspect the current repository and existing contracts/patterns;
+3. inspect durable project data and documentation;
+4. infer the safest reversible interpretation when the ambiguity is low-impact;
+5. record the assumption when it could matter later;
+6. escalate to the Project Director / Mission Control when the ambiguity can materially change architecture, scope, money, security, privacy, legal exposure, destructive operations, SEO/indexation, brand positioning or external side effects;
+7. ask Roberto only when the Director cannot resolve the decision from evidence and owner input is genuinely required.
+
+Low-risk ambiguity should not paralyse execution. High-impact ambiguity must never be guessed through.
+
+#### 2.1.3 Simplicity and complexity budget
+
+Minimum complexity is a hard design constraint.
+
+- no speculative features;
+- no configurability for hypothetical futures;
+- no abstraction merely to make a single-use path look architectural;
+- a single-use abstraction must protect a real invariant, meaningfully improve testability, or remove concrete duplication;
+- do not add defensive branches for states that cannot occur inside a trusted invariant; do validate every real trust boundary;
+- if a materially smaller implementation provides the same behavior, safety and operability, simplify before handoff;
+- every new abstraction, service, dependency, agent or data layer must remove more complexity or operational cost than it introduces;
+- GraphQL, GraphRAG, orchestration layers and internal platforms require a demonstrated bottleneck, not aesthetic preference.
+
+Complexity without demonstrated leverage is project debt.
+
+#### 2.1.4 Surgical-change invariant
+
+Every changed line must trace to one of:
+
+1. the requested outcome;
+2. a prerequisite required to make that outcome correct;
+3. cleanup made necessary by the agent's own change.
+
+Therefore:
+
+- do not reformat unrelated files;
+- do not rewrite unrelated comments;
+- do not refactor adjacent code because it looks improvable;
+- do not upgrade unrelated dependencies;
+- do not delete pre-existing dead code as a side quest;
+- do remove imports, variables, functions, tests or configuration made obsolete by your own change;
+- if an unrelated defect is discovered, record it separately instead of smuggling it into the diff;
+- preserve established local style unless that style is itself the demonstrated source of the defect;
+- broad refactors require their own explicit scope and Director approval.
+
+A clean diff is one where no changed line needs an excuse.
+
+#### 2.1.5 Goal contracts and verification loops
+
+Convert imperative requests into verifiable outcomes before implementation.
+
+Examples:
+
+```text
+"fix lead validation"
+→ reproduce an invalid lead that currently passes
+→ define the expected rejection behavior
+→ implement
+→ prove the bad lead now fails and valid leads still pass
+
+"refactor attribution"
+→ record current supported behavior
+→ define the invariant that must remain unchanged
+→ refactor
+→ prove behavior parity plus the intended improvement
+
+"add structured data"
+→ define the eligible page types and required visible facts
+→ generate JSON-LD
+→ validate syntax and factual consistency
+→ verify rendered production output
+```
+
+For multi-step work, use a short execution plan where every step has an observable verification. Then loop:
+
+```text
+implement
+→ verify
+→ diagnose failure
+→ correct root cause
+→ verify again
+```
+
+Do not loop forever. If repeated failure reveals that the premise, architecture or assigned scope is wrong, stop and escalate the evidence.
+
+"Make it work" is not a completion criterion.
+
+#### 2.1.6 Success criteria hierarchy
+
+A task's success criteria should prove the closest real outcome available:
+
+1. business/runtime behavior;
+2. end-to-end contract;
+3. integration behavior;
+4. focused automated test;
+5. type/schema/static check;
+6. visual/manual inspection for surfaces that cannot yet be automated.
+
+A green unit test does not override a broken real path. A successful build does not prove conversion, attribution, indexation, privacy or delivery behavior.
+
+#### 2.1.7 Diff-entropy check
+
+Before handoff, inspect the diff as a product artifact.
+
+Ask:
+
+- Is every file necessary?
+- Is every changed line explained by scope?
+- Did the task create a new concept that could have reused an existing one?
+- Did I accidentally make formatting/comment/dependency noise?
+- Did I leave an orphan created by my own change?
+- Is the implementation larger than the problem?
+
+If the diff is broader than the stated goal, either reduce it or split it before review.
+
 ---
 
 # 3. Ponytail protocol — mandatory coding discipline
@@ -223,6 +374,8 @@ Rules:
 
 When in doubt, reduce overlap rather than adding coordination machinery.
 
+Material strategic ambiguity belongs to the Project Director / Mission Control. Implementation workers execute the accepted scope; they do not silently redefine the North Star, pricing strategy, brand position, expansion order, canonical architecture or completion gates.
+
 ---
 
 ## 9. Dependency policy
@@ -295,9 +448,12 @@ It is complete when:
 
 - the requested outcome exists;
 - the real path was verified;
+- material assumptions were verified or explicitly recorded;
+- the stated success criteria are satisfied;
 - no known P0/P1 regression was introduced;
 - safety and privacy invariants remain intact;
-- the diff contains no unjustified scope;
+- every changed line belongs to scope or necessary cleanup created by the change;
+- the diff contains no unexplained or unjustified scope;
 - required tests/checks pass;
 - durable project knowledge is updated only when necessary;
 - the result advances bookings, production readiness, authority or an explicit prerequisite.
@@ -306,7 +462,7 @@ If there is no measurable project benefit, challenge whether the work should exi
 
 ---
 
-## 13. Attribution
+## 13. Attribution and adapted disciplines
 
 The Ponytail engineering discipline incorporated in Section 3 is adapted from:
 
@@ -315,4 +471,12 @@ The Ponytail engineering discipline incorporated in Section 3 is adapted from:
 - License: MIT
 - Copyright (c) 2026 DietrichGebert
 
-Where this project adds domain-specific requirements (SEO, GEO, accessibility, privacy, analytics, wedding-media evidence and agent coordination), those requirements extend rather than weaken the upstream safety posture.
+The reasoning principles in Section 2.1 are project-specific adaptations inspired by:
+
+- Repository: https://github.com/multica-ai/andrej-karpathy-skills
+- Upstream `CLAUDE.md`: https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md
+- Upstream describes four core themes: think before coding, simplicity, surgical changes and goal-driven execution.
+
+OASIS adapts those themes for autonomous multi-agent work by adding live-truth recovery, an ambiguity ladder, Director escalation, exact-scope discipline, project-specific safety boundaries and business-outcome verification.
+
+Where these upstream disciplines and OASIS domain requirements intersect, the stricter requirement governs. Neither minimalism nor autonomy may weaken security, privacy, accessibility, evidence integrity, SEO correctness, analytics, contractual safety or production verification.
