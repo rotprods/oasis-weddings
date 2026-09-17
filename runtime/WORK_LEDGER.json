@@ -1,8 +1,8 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "project_id": "PRJ-OW-001",
-  "updated_at": "2026-09-17T15:02:00+02:00",
-  "observed_main_sha": "6e073a1681d412129ab5f9c8f772ec107e097077",
+  "updated_at": "2026-09-17T15:12:00+02:00",
+  "observed_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
   "active_checkpoint": "CP1_OFFER_LOCK",
   "parallel_frontiers": ["CP2_PROOF_LOCK", "CP4_REVENUE_LOOP_LIVE"],
   "director": {
@@ -52,15 +52,31 @@
       "owner": "AGT-OW-TL-001",
       "goal_ids": ["G-OW-0001", "G-OW-1500"],
       "checkpoint": "CP0_POSTMERGE_RECONCILIATION",
-      "scope": "Rebase Mission Control truth after CP0 and Web W0/W1 promotion; dispatch next frontier",
+      "scope": "Rebase Mission Control truth after CP0 and Web W0/W1 promotion; open next frontier",
       "branch": "agent/mission-control-reconcile-v2",
       "base_head": "6e073a1681d412129ab5f9c8f772ec107e097077",
       "hardness": "H2",
-      "status": "ACTIVE",
+      "status": "PROMOTED",
       "dependencies": [],
       "tests": ["exact-head compare", "state/ledger consistency", "collision review"],
       "promotion_gate": "POSTMERGE_RECONCILED",
-      "evidence": []
+      "evidence": ["PR #7", "promotion sha 225ca0966488796eb29e97ed5bd61ad78ae388f6"]
+    },
+    {
+      "work_unit_id": "WU-OW-MC-DISPATCH-003",
+      "task_id": "TSK-OW-MC-DISPATCH-003",
+      "owner": "AGT-OW-TL-001",
+      "goal_ids": ["G-OW-0001", "G-OW-1500"],
+      "checkpoint": "CP1_DISPATCH",
+      "scope": "Register exact-head CP1/CP2/CP4 work orders, branches and blockers",
+      "branch": "agent/mission-control-dispatch-v3",
+      "base_head": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
+      "hardness": "H2",
+      "status": "ACTIVE",
+      "dependencies": [],
+      "tests": ["issue/branch existence", "agent-id consistency", "exact-head compare", "collision review"],
+      "promotion_gate": "FRONTIER_DISPATCHED",
+      "evidence": ["Issues #8 #9 #10 #12", "reserved worker branches", "PR #11 blocking review"]
     },
     {
       "work_unit_id": "WU-OW-CP1-RESEARCH-001",
@@ -70,31 +86,33 @@
       "goal_ids": ["G-OW-0100"],
       "checkpoint": "CP1_OFFER_LOCK",
       "scope": "Murcia/Spain competitor, customer voice and public pricing evidence dataset",
-      "branch": null,
-      "base_head": "6e073a1681d412129ab5f9c8f772ec107e097077",
+      "issue_number": 8,
+      "branch": "agent/cp1-market-intelligence",
+      "base_head": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
       "hardness": "H2",
-      "status": "READY_FOR_CLAIM",
+      "status": "DISPATCHED_AWAITING_CLAIM",
       "dependencies": [],
       "tests": ["source provenance", "fact-vs-inference review", "no fabricated pricing", "dedup/entity resolution"],
       "promotion_gate": "MARKET_EVIDENCE_BASELINE",
-      "evidence": []
+      "evidence": ["Issue #8"]
     },
     {
       "work_unit_id": "WU-OW-CP1-FIN-001",
       "task_id": "TSK-OW-ECON-001",
       "owner": null,
-      "preferred_agent": "AGT-OW-EXEC-ANALYTICS-001",
+      "preferred_agent": "AGT-OW-EXEC-ANL-001",
       "goal_ids": ["G-OW-0100", "G-OW-1200"],
       "checkpoint": "CP1_OFFER_LOCK",
       "scope": "Wedding package unit-economics model, scenario sensitivity and pricing guardrails",
-      "branch": null,
-      "base_head": "6e073a1681d412129ab5f9c8f772ec107e097077",
+      "issue_number": 9,
+      "branch": "agent/cp1-unit-economics",
+      "base_head": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
       "hardness": "H3",
-      "status": "READY_WITH_ASSUMPTION_BOUNDARY",
-      "dependencies": ["Real production costs remain unknown; scenarios must label assumptions explicitly."],
+      "status": "DISPATCHED_AWAITING_CLAIM",
+      "dependencies": ["Real production costs remain unknown; scenario models must label assumptions explicitly."],
       "tests": ["margin formula", "scenario sensitivity", "capacity check", "assumption ledger"],
       "promotion_gate": "UNIT_ECONOMICS_VALIDATED",
-      "evidence": []
+      "evidence": ["Issue #9"]
     },
     {
       "work_unit_id": "WU-OW-CP2-ASSET-001",
@@ -104,14 +122,15 @@
       "goal_ids": ["G-OW-0500"],
       "checkpoint": "CP2_PROOF_LOCK",
       "scope": "Inventory actual portfolio, testimonials, venue evidence and publication rights from authorized connected sources",
-      "branch": null,
-      "base_head": "6e073a1681d412129ab5f9c8f772ec107e097077",
+      "issue_number": 10,
+      "branch": "agent/cp2-portfolio-rights",
+      "base_head": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
       "hardness": "H4",
-      "status": "READY_FOR_SOURCE_DISCOVERY",
+      "status": "DISPATCHED_AWAITING_CLAIM",
       "dependencies": ["Authorized Drive/storage/account access"],
       "tests": ["rights status explicit", "no private-media publication", "provenance", "PII minimization"],
       "promotion_gate": "PORTFOLIO_TRUTH_BASELINE",
-      "evidence": []
+      "evidence": ["Issue #10"]
     },
     {
       "work_unit_id": "WU-OW-CP4-CRM-001",
@@ -121,14 +140,15 @@
       "goal_ids": ["G-OW-0900", "G-OW-1000", "G-OW-1200"],
       "checkpoint": "CP4_REVENUE_LOOP_LIVE",
       "scope": "CRM/tool inventory + canonical lead lifecycle + SLA + attribution contract",
-      "branch": null,
-      "base_head": "6e073a1681d412129ab5f9c8f772ec107e097077",
+      "issue_number": 12,
+      "branch": "agent/cp4-crm-contract",
+      "base_head": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
       "hardness": "H3",
-      "status": "READY_FOR_CLAIM",
+      "status": "DISPATCHED_AWAITING_CLAIM",
       "dependencies": [],
       "tests": ["lead state contract", "attribution persistence", "privacy boundary", "idempotency model"],
       "promotion_gate": "CRM_CONTRACT_LOCK",
-      "evidence": []
+      "evidence": ["Issue #12"]
     },
     {
       "work_unit_id": "WU-OW-WEB-W2-001",
@@ -139,27 +159,45 @@
       "checkpoint": "CP3_WEB_LIVE",
       "scope": "Conversion form + validation + privacy UI + CRM/attribution contract consumption",
       "branch": null,
-      "base_head": "6e073a1681d412129ab5f9c8f772ec107e097077",
+      "base_head": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
       "hardness": "H4",
       "status": "BLOCKED_ON_CRM_CONTRACT",
-      "dependencies": ["WU-OW-CP4-CRM-001 contract first"],
+      "dependencies": ["Mission Control acceptance of WU-OW-CP4-CRM-001 contract"],
       "tests": ["form validation", "privacy/consent", "E2E lead submit", "analytics PII exclusion", "duplicate/retry behavior"],
       "promotion_gate": "WEB_W2_CONVERSION",
       "evidence": []
+    },
+    {
+      "work_unit_id": "WU-OW-MC-RUNTIME-001",
+      "task_id": "TSK-OW-MC-RUNTIME-001",
+      "owner": "AGT-OW-EXEC-GENERAL-001",
+      "goal_ids": ["G-OW-0001", "G-OW-1500"],
+      "checkpoint": "CONTROL_PLANE_RUNTIME",
+      "scope": "Executable Mission Control runtime with claims/leases/fencing/events",
+      "branch": "agent/exec-mission-control-runtime-v1",
+      "pr_number": 11,
+      "base_head": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
+      "observed_head": "d0007a0a2b5ac809e7c91eefaa6f6457fd6195f5",
+      "hardness": "H4",
+      "status": "REWORK_REQUIRED_DRAFT",
+      "dependencies": [],
+      "tests": ["real canonical state integration", "glob/hierarchical scope collision", "authorized recovery takeover", "authoritative exact-head rejection", "work-authority reconciliation"],
+      "promotion_gate": "MISSION_CONTROL_RUNTIME_COMPATIBLE",
+      "blockers": ["canonical STATE compatibility/migration", "resource-scope glob/hierarchy collision semantics", "authorized RECOVERY_TAKEOVER", "WORK_UNITS vs WORK_LEDGER authority reconciliation", "authoritative exact-head validation"],
+      "evidence": ["PR #11", "Director blocking comment #5715664503"]
     }
   ],
   "collision_locks": [
     {
       "scope": ["runtime/agent-graph/STATE.json", "runtime/WORK_LEDGER.json", "runtime/checkpoints/**"],
       "owner": "AGT-OW-TL-001",
-      "state": "LOCKED_POSTMERGE_RECONCILIATION"
+      "state": "LOCKED_DISPATCH_RECONCILIATION"
     }
   ],
-  "released_locks": [
-    {
-      "scope": ["src/**", "AGENTS-DESIGN.md", "package.json", "package-lock.json", ".github/workflows/web-foundation.yml"],
-      "previous_owner": "AGT-OW-EXEC-WEB-001",
-      "reason": "W0/W1 promoted via PR #5; future W2 requires a fresh claim based on current main."
-    }
+  "reserved_scopes": [
+    {"scope": ["research/market/**", "research/competitors/**", "research/customer-voice/**"], "issue": 8, "branch": "agent/cp1-market-intelligence", "preferred_agent": "AGT-OW-EXEC-POS-001", "state": "RESERVED_NOT_CLAIMED"},
+    {"scope": ["finance/unit-economics/**", "analytics/economics/**"], "issue": 9, "branch": "agent/cp1-unit-economics", "preferred_agent": "AGT-OW-EXEC-ANL-001", "state": "RESERVED_NOT_CLAIMED"},
+    {"scope": ["portfolio/inventory/**", "portfolio/rights/**", "portfolio/coverage/**"], "issue": 10, "branch": "agent/cp2-portfolio-rights", "preferred_agent": "AGT-OW-EXEC-PORT-001", "state": "RESERVED_NOT_CLAIMED"},
+    {"scope": ["crm/contracts/**", "crm/pipeline/**", "crm/tooling/**", "analytics/contracts/**"], "issue": 12, "branch": "agent/cp4-crm-contract", "preferred_agent": "AGT-OW-EXEC-CRM-001", "state": "RESERVED_NOT_CLAIMED"}
   ]
 }
