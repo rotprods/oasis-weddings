@@ -1,0 +1,141 @@
+schema_version: "1.0.0"
+graph_id: AGR-OW-001
+
+project:
+  project_id: PRJ-OW-001
+  name: OASIS WEDDINGS
+  repository: rotprods/oasis-weddings
+  human_owner_id: HUM-ROB-001
+  team_lead_agent_id: AGT-OW-TL-001
+  north_star_goal_id: G-OW-0001
+
+identity_contract:
+  required_for_material_work:
+    - project_id
+    - agent_id
+    - parent_agent_id
+    - session_id
+    - run_id
+    - correlation_id
+    - goal_ids
+    - objective_id
+    - workstream_id
+    - plan_id
+    - task_id
+    - work_unit_id
+    - niche_ids
+    - protect_ids
+    - claim_id
+    - lease_id
+    - fencing_token
+    - branch
+    - base_main_sha
+    - authority_source
+    - authority_ceiling
+  session_id_reuse: false
+  work_unit_is_agent_independent: true
+  pr_is_ownership: false
+  ownership_contract: claim_plus_live_lease_plus_fencing
+
+hierarchy:
+  human_owner:
+    human_id: HUM-ROB-001
+    role: FOUNDER_OWNER
+    authority: FINAL_PRODUCT_AND_BUSINESS_DIRECTION
+  team_lead:
+    agent_id: AGT-OW-TL-001
+    role: TEAM_LEAD
+    aliases: [PROJECT_DIRECTOR, MISSION_CONTROL]
+    parent_human_id: HUM-ROB-001
+    authority_ceiling: PROJECT_ORCHESTRATION
+  executor_default:
+    role: EXECUTOR
+    authority_ceiling: CLAIMED_SCOPE_ONLY
+  laws:
+    - Executors never self-promote to TEAM_LEAD.
+    - TEAM_LEAD allocates and reassigns material scopes, resolves collisions and promotes checkpoints.
+    - HUMAN_OVERRIDE may authorize one bounded executor scope while TEAM_LEAD is unbound.
+    - niche_id expresses expertise; claim plus lease plus fencing expresses write authority.
+
+niches:
+  - {niche_id: NIC-POSITIONING-001, name: POSITIONING, scope: "category, offer, differentiation, messaging"}
+  - {niche_id: NIC-WEB-001, name: WEB, scope: "public website, IA, UX, conversion"}
+  - {niche_id: NIC-SEO-001, name: SEO, scope: "organic search, technical SEO, SERP capture"}
+  - {niche_id: NIC-GEO-001, name: GEO_AI_DISCOVERY, scope: "AI-search discoverability, citations, entity legibility"}
+  - {niche_id: NIC-PORTFOLIO-001, name: PORTFOLIO, scope: "photography, films, real-wedding proof, case studies"}
+  - {niche_id: NIC-CONTENT-001, name: CONTENT, scope: "editorial, guides, venues, real weddings, knowledge moat"}
+  - {niche_id: NIC-LOCAL-001, name: LOCAL_SEARCH, scope: "Murcia, GBP, venues, reviews, local intent"}
+  - {niche_id: NIC-MARKETING-001, name: MARKETING, scope: "distribution, lifecycle, growth, campaigns"}
+  - {niche_id: NIC-SALES-001, name: SALES, scope: "qualification, consultations, proposals, close"}
+  - {niche_id: NIC-CRM-001, name: CRM, scope: "lead state, follow-up, pipeline, attribution"}
+  - {niche_id: NIC-ADS-001, name: PAID_MEDIA, scope: "Google Ads, Meta Ads, landing alignment, offline conversions"}
+  - {niche_id: NIC-ANALYTICS-001, name: ANALYTICS, scope: "measurement, attribution, experimentation, revenue KPIs"}
+  - {niche_id: NIC-ENGINEERING-001, name: ENGINEERING, scope: "architecture, data, CI, performance, integrations"}
+  - {niche_id: NIC-AUTHORITY-001, name: AUTHORITY_PR, scope: "digital PR, publications, backlinks, partnerships"}
+  - {niche_id: NIC-QA-001, name: QA_GOVERNANCE, scope: "tests, invariants, security, accessibility, release evidence"}
+
+protects:
+  - {protect_id: PROT-NORTHSTAR-001, name: NORTH_STAR, severity: HARD, invariant: "qualified enquiries -> consultations -> signed profitable contracts outrank activity proxies"}
+  - {protect_id: PROT-TRUTH-001, name: EVIDENCE_TRUTH, severity: HARD, invariant: "never fabricate claims, awards, reviews, venues, pricing, availability, clients or authority"}
+  - {protect_id: PROT-SINGLEWRITER-001, name: SINGLE_WRITER, severity: HARD, invariant: "one live writer per exact material scope; stale writers are fenced"}
+  - {protect_id: PROT-EXACTHEAD-001, name: EXACT_HEAD, severity: HARD, invariant: "every material mutation binds to refreshed main ancestry before promotion"}
+  - {protect_id: PROT-PRIVACY-001, name: PRIVACY_CONSENT, severity: HARD, invariant: "wedding media and personal data require valid rights and minimum necessary exposure"}
+  - {protect_id: PROT-SECURITY-001, name: SECURITY, severity: HARD, invariant: "never weaken validation, authorization, secrets, idempotency or data-loss safeguards"}
+  - {protect_id: PROT-SEO-001, name: SEO_CRAWLABILITY, severity: HARD, invariant: "preserve rendered content, indexability, canonicals, structured data and crawler policy"}
+  - {protect_id: PROT-A11Y-001, name: ACCESSIBILITY, severity: HARD, invariant: "accessibility may not be traded away for aesthetics or minimal code"}
+  - {protect_id: PROT-ATTRIBUTION-001, name: ATTRIBUTION_INTEGRITY, severity: HARD, invariant: "preserve source, campaign, landing-page and revenue lineage"}
+  - {protect_id: PROT-NOSPAM-001, name: NO_DOORWAY_OR_CONTENT_SPAM, severity: HARD, invariant: "no mass near-duplicate location pages, keyword stuffing, fake expertise or low-value scaled content"}
+  - {protect_id: PROT-PONYTAIL-001, name: PONYTAIL_MINIMALISM, severity: HARD, invariant: "understand first; implement the smallest production-correct change without cutting safety or verification"}
+  - {protect_id: PROT-OUTCOMEFIRST-001, name: OUTCOME_FIRST, severity: HARD, invariant: "customer acquisition and conversion outcomes outrank non-blocking architecture"}
+  - {protect_id: PROT-HUMAN-001, name: HUMAN_AUTHORITY, severity: HARD, invariant: "TEAM_LEAD coordinates agents but never fabricates or overrides explicit founder approval"}
+
+goals:
+  - goal_id: G-OW-0001
+    parent_goal_id: null
+    name: NORTH_STAR
+    outcome: "win qualified, profitable wedding bookings in Murcia first, then Levante, Spain and destination weddings"
+    niche_ids: [NIC-POSITIONING-001, NIC-WEB-001, NIC-SEO-001, NIC-GEO-001, NIC-PORTFOLIO-001, NIC-MARKETING-001, NIC-SALES-001, NIC-CRM-001, NIC-ANALYTICS-001]
+    protect_ids: [PROT-NORTHSTAR-001, PROT-TRUTH-001, PROT-OUTCOMEFIRST-001, PROT-HUMAN-001]
+  - {goal_id: G-OW-0100, parent_goal_id: G-OW-0001, name: POSITIONING_AND_OFFER, outcome: "differentiated evidence-backed positioning and offer architecture", niche_ids: [NIC-POSITIONING-001, NIC-MARKETING-001, NIC-SALES-001], protect_ids: [PROT-TRUTH-001, PROT-NORTHSTAR-001]}
+  - {goal_id: G-OW-0200, parent_goal_id: G-OW-0001, name: WEB_CONVERSION_PRODUCT, outcome: "premium fast indexable website converting couples into availability enquiries", niche_ids: [NIC-WEB-001, NIC-ENGINEERING-001, NIC-QA-001], protect_ids: [PROT-SEO-001, PROT-A11Y-001, PROT-SECURITY-001, PROT-PONYTAIL-001, PROT-ATTRIBUTION-001]}
+  - {goal_id: G-OW-0300, parent_goal_id: G-OW-0001, name: SEO_ORGANIC_DEMAND, outcome: "capture high-intent non-brand organic demand with useful evidence-backed pages", niche_ids: [NIC-SEO-001, NIC-CONTENT-001, NIC-WEB-001], protect_ids: [PROT-SEO-001, PROT-NOSPAM-001, PROT-TRUTH-001]}
+  - {goal_id: G-OW-0400, parent_goal_id: G-OW-0001, name: GEO_AI_DISCOVERY, outcome: "make OASIS legible citable and measurable in AI-assisted search", niche_ids: [NIC-GEO-001, NIC-SEO-001, NIC-CONTENT-001, NIC-ANALYTICS-001], protect_ids: [PROT-TRUTH-001, PROT-SEO-001, PROT-NOSPAM-001]}
+  - {goal_id: G-OW-0500, parent_goal_id: G-OW-0001, name: PORTFOLIO_PROOF, outcome: "turn real photography and films into permissioned proof connected to weddings venues and services", niche_ids: [NIC-PORTFOLIO-001, NIC-WEB-001, NIC-CONTENT-001], protect_ids: [PROT-PRIVACY-001, PROT-TRUTH-001, PROT-SEO-001]}
+  - {goal_id: G-OW-0600, parent_goal_id: G-OW-0001, name: CONTENT_KNOWLEDGE_MOAT, outcome: "build original venue planning real-wedding and service knowledge that compounds discovery", niche_ids: [NIC-CONTENT-001, NIC-SEO-001, NIC-GEO-001, NIC-PORTFOLIO-001], protect_ids: [PROT-TRUTH-001, PROT-NOSPAM-001, PROT-PRIVACY-001]}
+  - {goal_id: G-OW-0700, parent_goal_id: G-OW-0001, name: LOCAL_MURCIA_AUTHORITY, outcome: "build Murcia prominence across GBP venues reviews vendors and local search", niche_ids: [NIC-LOCAL-001, NIC-SEO-001, NIC-AUTHORITY-001], protect_ids: [PROT-TRUTH-001, PROT-NOSPAM-001]}
+  - {goal_id: G-OW-0800, parent_goal_id: G-OW-0001, name: MARKETING_DISTRIBUTION, outcome: "distribute portfolio and authority assets across owned social partner and remarketing surfaces", niche_ids: [NIC-MARKETING-001, NIC-CONTENT-001, NIC-PORTFOLIO-001], protect_ids: [PROT-NORTHSTAR-001, PROT-TRUTH-001]}
+  - {goal_id: G-OW-0900, parent_goal_id: G-OW-0001, name: SALES_CONVERSION, outcome: "convert qualified enquiries into consultations proposals and profitable signed contracts", niche_ids: [NIC-SALES-001, NIC-CRM-001, NIC-POSITIONING-001], protect_ids: [PROT-TRUTH-001, PROT-HUMAN-001, PROT-ATTRIBUTION-001]}
+  - {goal_id: G-OW-1000, parent_goal_id: G-OW-0001, name: CRM_LEAD_OPERATIONS, outcome: "reliable lead pipeline with source status follow-up and outcome truth", niche_ids: [NIC-CRM-001, NIC-SALES-001, NIC-ANALYTICS-001], protect_ids: [PROT-PRIVACY-001, PROT-ATTRIBUTION-001, PROT-SINGLEWRITER-001]}
+  - {goal_id: G-OW-1100, parent_goal_id: G-OW-0001, name: PAID_ACQUISITION, outcome: "acquire profitable demand through paid search and social with offline-conversion feedback", niche_ids: [NIC-ADS-001, NIC-MARKETING-001, NIC-ANALYTICS-001], protect_ids: [PROT-NORTHSTAR-001, PROT-ATTRIBUTION-001, PROT-TRUTH-001]}
+  - {goal_id: G-OW-1200, parent_goal_id: G-OW-0001, name: ANALYTICS_ATTRIBUTION, outcome: "measure query campaign page -> qualified lead -> booking -> revenue", niche_ids: [NIC-ANALYTICS-001, NIC-CRM-001, NIC-ENGINEERING-001], protect_ids: [PROT-ATTRIBUTION-001, PROT-PRIVACY-001, PROT-TRUTH-001]}
+  - {goal_id: G-OW-1300, parent_goal_id: G-OW-0001, name: ENGINEERING_PLATFORM, outcome: "smallest reliable technical substrate required by customer-facing acquisition and operations", niche_ids: [NIC-ENGINEERING-001, NIC-WEB-001, NIC-QA-001], protect_ids: [PROT-PONYTAIL-001, PROT-SECURITY-001, PROT-SINGLEWRITER-001, PROT-EXACTHEAD-001, PROT-OUTCOMEFIRST-001]}
+  - {goal_id: G-OW-1400, parent_goal_id: G-OW-0001, name: AUTHORITY_PR_PARTNERSHIPS, outcome: "earn credible mentions links publications and venue or vendor relationships", niche_ids: [NIC-AUTHORITY-001, NIC-MARKETING-001, NIC-LOCAL-001], protect_ids: [PROT-TRUTH-001, PROT-NORTHSTAR-001]}
+  - {goal_id: G-OW-1500, parent_goal_id: G-OW-0001, name: QA_GOVERNANCE, outcome: "keep releases evidence-backed collision-safe secure accessible and recoverable", niche_ids: [NIC-QA-001, NIC-ENGINEERING-001], protect_ids: [PROT-SINGLEWRITER-001, PROT-EXACTHEAD-001, PROT-SECURITY-001, PROT-A11Y-001, PROT-HUMAN-001]}
+
+agents:
+  - {agent_id: AGT-OW-TL-001, parent_agent_id: null, role: TEAM_LEAD, binding: UNBOUND, niche_ids: [NIC-QA-001], goal_ids: [G-OW-0001], authority_ceiling: PROJECT_ORCHESTRATION}
+  - {agent_id: AGT-OW-EXEC-GENERAL-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [], goal_ids: [G-OW-0001], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-POS-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-POSITIONING-001], goal_ids: [G-OW-0100], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-WEB-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-WEB-001, NIC-ENGINEERING-001], goal_ids: [G-OW-0200, G-OW-1300], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-SEO-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-SEO-001, NIC-LOCAL-001], goal_ids: [G-OW-0300, G-OW-0700], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-GEO-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-GEO-001], goal_ids: [G-OW-0400], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-PORT-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-PORTFOLIO-001], goal_ids: [G-OW-0500], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-CONTENT-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-CONTENT-001], goal_ids: [G-OW-0600], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-MKT-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-MARKETING-001], goal_ids: [G-OW-0800], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-SALES-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-SALES-001], goal_ids: [G-OW-0900], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-CRM-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-CRM-001], goal_ids: [G-OW-1000], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-ADS-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-ADS-001], goal_ids: [G-OW-1100], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-ANL-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-ANALYTICS-001], goal_ids: [G-OW-1200], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-ENG-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-ENGINEERING-001], goal_ids: [G-OW-1300], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-AUTH-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-AUTHORITY-001], goal_ids: [G-OW-1400], authority_ceiling: CLAIMED_SCOPE_ONLY}
+  - {agent_id: AGT-OW-EXEC-QA-001, parent_agent_id: AGT-OW-TL-001, role: EXECUTOR, binding: UNBOUND, niche_ids: [NIC-QA-001], goal_ids: [G-OW-1500], authority_ceiling: CLAIMED_SCOPE_ONLY}
+
+workstreams:
+  - {workstream_id: WS-OW-INTEL-001, name: COMPETITIVE_AND_SERP_INTELLIGENCE, goal_ids: [G-OW-0100, G-OW-0300, G-OW-0400], niche_ids: [NIC-POSITIONING-001, NIC-SEO-001, NIC-GEO-001]}
+  - {workstream_id: WS-OW-WEB-001, name: MONEY_SITE_AND_WEB_PLATFORM, goal_ids: [G-OW-0200, G-OW-1300], niche_ids: [NIC-WEB-001, NIC-ENGINEERING-001]}
+  - {workstream_id: WS-OW-PORTFOLIO-001, name: PORTFOLIO_WEDDINGS_AND_FILMS, goal_ids: [G-OW-0500, G-OW-0600], niche_ids: [NIC-PORTFOLIO-001, NIC-CONTENT-001]}
+  - {workstream_id: WS-OW-LOCAL-001, name: MURCIA_LOCAL_AUTHORITY, goal_ids: [G-OW-0700, G-OW-1400], niche_ids: [NIC-LOCAL-001, NIC-AUTHORITY-001]}
+  - {workstream_id: WS-OW-REVENUE-001, name: MARKETING_SALES_CRM_AND_PAID, goal_ids: [G-OW-0800, G-OW-0900, G-OW-1000, G-OW-1100, G-OW-1200], niche_ids: [NIC-MARKETING-001, NIC-SALES-001, NIC-CRM-001, NIC-ADS-001, NIC-ANALYTICS-001]}
+  - {workstream_id: WS-OW-GOV-001, name: QA_GOVERNANCE_AND_RECOVERY, goal_ids: [G-OW-1500], niche_ids: [NIC-QA-001]}
+
+edge_types: [OWNS_DIRECTION, SUPERVISES, EXECUTES, ADVANCES, SPECIALIZES_IN, GUARDED_BY, DEPENDS_ON, BLOCKED_BY, PRODUCES_EVIDENCE_FOR, HANDOFF_TO]

@@ -215,7 +215,7 @@ After understanding the real problem and tracing the affected flow, stop at the 
 
 1. **Does this need to exist?** If not, do not build it.
 2. **Does it already exist in this codebase?** Reuse the existing helper, component, pattern, schema or service.
-3. **Does the language / standard library already solve it?** Use that.
+3. **Does the language / standard library already solve it?** Use it.
 4. **Does the native web/platform capability solve it?** Prefer the native capability.
 5. **Does an already-installed dependency solve it correctly?** Reuse it before adding another dependency.
 6. **Can the correct implementation be one small expression or primitive?** Keep it that small.
@@ -375,6 +375,41 @@ Rules:
 When in doubt, reduce overlap rather than adding coordination machinery.
 
 Material strategic ambiguity belongs to the Project Director / Mission Control. Implementation workers execute the accepted scope; they do not silently redefine the North Star, pricing strategy, brand position, expansion order, canonical architecture or completion gates.
+
+### 8.1 Canonical Agent Graph and role lock
+
+The canonical machine-readable hierarchy is `runtime/agent-graph/AGENT_GRAPH.yaml`. Mutable bindings, sessions, claims and leases are projected in `runtime/agent-graph/STATE.json` until a stronger live coordination backend explicitly supersedes that projection.
+
+For OASIS WEDDINGS, **Project Director**, **Mission Control** and **TEAM_LEAD** refer to the same top-level agent control role: `AGT-OW-TL-001`. They are aliases, not three competing authorities.
+
+Authority chain:
+
+```text
+HUM-ROB-001 · FOUNDER / OWNER
+→ AGT-OW-TL-001 · TEAM_LEAD / PROJECT_DIRECTOR / MISSION_CONTROL
+→ AGT-OW-EXEC-* · EXECUTORS
+```
+
+Every newly invoked ordinary agent defaults to `EXECUTOR`. An executor never self-promotes to `TEAM_LEAD`, never treats a PR as ownership, and never acquires another live writer's material scope by assumption.
+
+Before material mutation, a worker must recover from the graph/state and bind its work to:
+
+```text
+project_id + agent_id + parent_agent_id + session_id + run_id + correlation_id
++ goal_ids[] + objective_id + workstream_id + plan_id + task_id + work_unit_id
++ niche_ids[] + protect_ids[] + claim_id + lease_id + fencing_token
++ branch/worktree where applicable + base_main_sha + authority_source + authority_ceiling
+```
+
+`niche_id` is routing/expertise, not authority. Canonical niches include web, marketing, sales, positioning, SEO, GEO/AI discovery, portfolio, content, local search, CRM, paid media, analytics, engineering, authority/PR and QA/governance.
+
+`protect_id` is a cross-cutting invariant that must survive the change. Hard protects include North Star alignment, evidence truth, single-writer, exact-head, privacy/consent, security, SEO crawlability, accessibility, attribution integrity, no doorway/content spam, Ponytail minimalism, outcome-first execution and human authority.
+
+A material task is not promotable while a linked hard `protect_id` is violated.
+
+A live Team Lead must be explicitly bound in `STATE.json` or a later authoritative runtime store. Do not infer that one exists from prose, chat history, an old heartbeat or an agent claiming the title. While the Team Lead slot is `UNBOUND`, read/research may continue; material writes require a bounded direct `HUMAN_OVERRIDE` or a valid recovery takeover. A human override authorizes the scope but does not promote the executor.
+
+The stable unit is `work_unit_id`, not the current worker. Sessions are disposable; work/evidence/authority lineage is durable.
 
 ---
 

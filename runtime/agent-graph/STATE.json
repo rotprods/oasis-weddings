@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "PRJ-OW-001",
+  "graph_id": "AGR-OW-001",
+  "mode": "BOOTSTRAP",
+  "authority": {
+    "repository": "rotprods/oasis-weddings",
+    "default_branch": "main",
+    "last_observed_main_sha": "66b99a77d93de8708f298644075bd5e604e1c939",
+    "state_is_operational_truth": false,
+    "note": "Initial repository projection only; a future event/lease store may supersede it as live coordination authority."
+  },
+  "team_lead": {
+    "agent_id": "AGT-OW-TL-001",
+    "parent_human_id": "HUM-ROB-001",
+    "aliases": ["PROJECT_DIRECTOR", "MISSION_CONTROL"],
+    "state": "UNBOUND",
+    "session_id": null,
+    "run_id": null,
+    "authority_ceiling": "PROJECT_ORCHESTRATION"
+  },
+  "active_sessions": [],
+  "active_claims": [],
+  "active_leases": [],
+  "active_writers": [],
+  "fencing": {
+    "last_issued_token": 0,
+    "rule": "A takeover must use a strictly greater token than the predecessor token for the same scope."
+  },
+  "bootstrap": {
+    "authority_source": "HUMAN_OVERRIDE",
+    "scope": "agent-graph-bootstrap",
+    "branch": "agent/agent-graph-bootstrap",
+    "base_main_sha": "66b99a77d93de8708f298644075bd5e604e1c939",
+    "executor_role": "AGT-OW-EXEC-GENERAL-001",
+    "team_lead_was_live": false,
+    "reason": "Explicit founder instruction to create the Agent Graph and establish the Team Lead hierarchy.",
+    "expires_on_scope_closure": true
+  },
+  "writer_authorization_law": {
+    "default": "READ_ONLY_UNTIL_CLAIMED",
+    "allowed_authority_sources": ["TEAM_LEAD_CLAIM", "HUMAN_OVERRIDE", "RECOVERY_TAKEOVER"],
+    "material_write_requires": [
+      "fresh_session_id",
+      "fresh_run_id",
+      "work_unit_id",
+      "goal_ids",
+      "niche_ids",
+      "protect_ids",
+      "claim_id",
+      "lease_id",
+      "fencing_token",
+      "refreshed_base_main_sha",
+      "authority_source",
+      "authority_ceiling"
+    ]
+  },
+  "next_safe_action": "After this bootstrap change is reviewed and promoted, bind a fresh TEAM_LEAD session before parallel material execution. Until then, executors may research/read freely but shared writes require an explicit bounded HUMAN_OVERRIDE."
+}
