@@ -1,0 +1,27 @@
+{
+  "checkpoint": "CP2_PROOF_LOCK",
+  "status": "ACTIVE_PARALLEL_FRONTIER",
+  "opened_at": "2026-09-17T15:05:00+02:00",
+  "director": "AGT-OW-TL-001",
+  "baseline_main_sha": "6e073a1681d412129ab5f9c8f772ec107e097077",
+  "goal": "Establish the real portfolio/evidence baseline and publication-rights truth required for public proof.",
+  "required_work_units": ["WU-OW-CP2-ASSET-001"],
+  "required_gates": {
+    "portfolio_inventory": false,
+    "publication_rights_matrix": false,
+    "venue_evidence_matrix": false,
+    "review_testimonial_provenance": false,
+    "coverage_gap_matrix": false,
+    "no_private_media_leak": true,
+    "no_fabricated_client_work": true
+  },
+  "stop_conditions": [
+    "Do not publish a couple, guest, minor, venue testimonial or private asset with unknown/insufficient rights.",
+    "Do not infer consent from Drive/storage availability.",
+    "Styled/editorial shoots must be labeled truthfully and may not be represented as client weddings."
+  ],
+  "promotion_rule": "A target buyer can be shown credible permissioned work, each public asset has known provenance/rights state, and critical portfolio gaps have a concrete acquisition plan.",
+  "p0": [],
+  "p1": [],
+  "director_decision": "OPEN"
+}
