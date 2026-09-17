@@ -1,14 +1,14 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "project_id": "PRJ-OW-001",
   "graph_id": "AGR-OW-001",
-  "mode": "TEAM_LEAD_BOUND_CP0_ACTIVE",
+  "mode": "CP1_CP2_CP4_FRONTIER_ACTIVE",
   "authority": {
     "repository": "rotprods/oasis-weddings",
     "default_branch": "main",
-    "last_observed_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76",
+    "last_observed_main_sha": "6e073a1681d412129ab5f9c8f772ec107e097077",
     "state_is_operational_truth": false,
-    "note": "Repository projection of Mission Control state. Runtime/branch/PR reality remains higher authority."
+    "note": "Repository projection of Mission Control state. Live GitHub/runtime truth outranks this projection when newer."
   },
   "team_lead": {
     "agent_id": "AGT-OW-TL-001",
@@ -30,91 +30,102 @@
       "run_id": "RUN-OW-GAUNTLET-20260917-001",
       "correlation_id": "COR-OW-GAUNTLET-20260917-001",
       "state": "ACTIVE",
-      "branch": "agent/mission-control-runtime-v1",
-      "base_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76"
+      "branch": "agent/mission-control-reconcile-v2",
+      "base_main_sha": "6e073a1681d412129ab5f9c8f772ec107e097077"
     }
   ],
   "active_claims": [
     {
-      "claim_id": "CLM-OW-TL-CP0-001",
+      "claim_id": "CLM-OW-TL-RECON-002",
       "agent_id": "AGT-OW-TL-001",
-      "work_unit_id": "WU-OW-CP0-CONTROL-001",
+      "work_unit_id": "WU-OW-MC-RECON-002",
       "goal_ids": ["G-OW-0001", "G-OW-1500"],
       "niche_ids": ["NIC-QA-001"],
       "protect_ids": ["PROT-NORTHSTAR-001", "PROT-SINGLEWRITER-001", "PROT-EXACTHEAD-001", "PROT-TRUTH-001", "PROT-HUMAN-001"],
-      "scope": ["NORTH_STAR.md", "MEMORY.md", "runtime/WORK_LEDGER.json", "runtime/checkpoints/**", "runtime/agent-graph/STATE.json"],
-      "excluded_scope": ["src/**", "AGENTS-DESIGN.md", "package.json", "package-lock.json", ".github/workflows/web-foundation.yml"],
+      "scope": ["runtime/agent-graph/STATE.json", "runtime/WORK_LEDGER.json", "runtime/checkpoints/**"],
+      "excluded_scope": ["src/**", "AGENTS-DESIGN.md", "package.json", "package-lock.json"],
       "state": "ACTIVE"
     }
   ],
   "active_leases": [
     {
-      "lease_id": "LSE-OW-TL-CP0-001",
-      "claim_id": "CLM-OW-TL-CP0-001",
+      "lease_id": "LSE-OW-TL-RECON-002",
+      "claim_id": "CLM-OW-TL-RECON-002",
       "agent_id": "AGT-OW-TL-001",
-      "fencing_token": 1,
+      "fencing_token": 2,
       "state": "ACTIVE",
-      "authority_source": "HUMAN_OVERRIDE",
+      "authority_source": "TEAM_LEAD_CLAIM",
       "authority_ceiling": "PROJECT_ORCHESTRATION",
-      "branch": "agent/mission-control-runtime-v1",
-      "base_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76"
+      "branch": "agent/mission-control-reconcile-v2",
+      "base_main_sha": "6e073a1681d412129ab5f9c8f772ec107e097077"
     }
   ],
   "active_writers": [
     {
       "agent_id": "AGT-OW-TL-001",
-      "claim_id": "CLM-OW-TL-CP0-001",
-      "lease_id": "LSE-OW-TL-CP0-001",
-      "fencing_token": 1,
-      "scope": "MISSION_CONTROL_CP0_CONTROL_PLANE",
-      "branch": "agent/mission-control-runtime-v1"
+      "claim_id": "CLM-OW-TL-RECON-002",
+      "lease_id": "LSE-OW-TL-RECON-002",
+      "fencing_token": 2,
+      "scope": "MISSION_CONTROL_POSTMERGE_RECONCILIATION",
+      "branch": "agent/mission-control-reconcile-v2"
     }
   ],
-  "observed_external_work": [
+  "promoted_work": [
     {
+      "work_unit_id": "WU-OW-CP0-CONTROL-001",
+      "status": "PROMOTED",
+      "pr_number": 6,
+      "promotion_sha": "f66f18069717c436d3e6c8295d36581e30d7dc2"
+    },
+    {
+      "work_unit_id": "WU-OW-WEB-001",
       "agent_id": "AGT-OW-EXEC-WEB-001",
-      "branch": "agent/web-design-assetsgraph",
+      "status": "PROMOTED_W0_W1",
       "pr_number": 5,
-      "issue_number": 4,
-      "state": "DRAFT_AWAITING_DIRECTOR_REVIEW",
-      "scope": "WEB W0-W1 foundation + AGENTS-DESIGN + public route scaffold",
-      "head_sha": "fb9c88a2ec9f15499e708aa9665ce72e025ecaa9",
-      "collision_rule": "Do not mutate web-owned files from Mission Control branch."
+      "promotion_sha": "6e073a1681d412129ab5f9c8f772ec107e097077",
+      "next_scope": "W2 conversion form + privacy + CRM/attribution contract; W3 AssetsGraph only after rights-approved source data exists."
+    }
+  ],
+  "ready_frontier": [
+    {
+      "work_unit_id": "WU-OW-CP1-RESEARCH-001",
+      "preferred_agent_id": "AGT-OW-EXEC-POS-001",
+      "scope": "market/competitor/customer-voice/pricing evidence baseline",
+      "hardness": "H2"
+    },
+    {
+      "work_unit_id": "WU-OW-CP1-FIN-001",
+      "preferred_agent_id": "AGT-OW-EXEC-ANALYTICS-001",
+      "scope": "unit economics + package economics + pricing guardrails",
+      "hardness": "H3"
+    },
+    {
+      "work_unit_id": "WU-OW-CP2-ASSET-001",
+      "preferred_agent_id": "AGT-OW-EXEC-PORT-001",
+      "scope": "portfolio/assets/publication-rights truth inventory",
+      "hardness": "H4"
+    },
+    {
+      "work_unit_id": "WU-OW-WEB-W2-001",
+      "preferred_agent_id": "AGT-OW-EXEC-WEB-001",
+      "scope": "conversion form + validation + privacy + CRM/attribution contract",
+      "hardness": "H4"
+    },
+    {
+      "work_unit_id": "WU-OW-CP4-CRM-001",
+      "preferred_agent_id": "AGT-OW-EXEC-CRM-001",
+      "scope": "CRM/tool inventory + canonical lead lifecycle + SLA + attribution",
+      "hardness": "H3"
     }
   ],
   "fencing": {
-    "last_issued_token": 1,
+    "last_issued_token": 2,
     "rule": "A takeover must use a strictly greater token than the predecessor token for the same scope."
-  },
-  "bootstrap": {
-    "authority_source": "HUMAN_OVERRIDE",
-    "scope": "agent-graph-bootstrap",
-    "status": "PROMOTED",
-    "bootstrap_branch": "agent/agent-graph-bootstrap",
-    "base_main_sha": "66b99a77d93de8708f298644075bd5e604e1c939",
-    "promotion_sha": "fc9fc6d2a4358a698af935608a4dd95c09b82c35",
-    "executor_role": "AGT-OW-EXEC-GENERAL-001",
-    "team_lead_was_live": false,
-    "reason": "Explicit founder instruction to create the Agent Graph and establish the Team Lead hierarchy.",
-    "authority_expired": true
   },
   "writer_authorization_law": {
     "default": "READ_ONLY_UNTIL_CLAIMED",
     "allowed_authority_sources": ["TEAM_LEAD_CLAIM", "HUMAN_OVERRIDE", "RECOVERY_TAKEOVER"],
-    "material_write_requires": [
-      "fresh_session_id",
-      "fresh_run_id",
-      "work_unit_id",
-      "goal_ids",
-      "niche_ids",
-      "protect_ids",
-      "claim_id",
-      "lease_id",
-      "fencing_token",
-      "refreshed_base_main_sha",
-      "authority_source",
-      "authority_ceiling"
-    ]
+    "material_write_requires": ["fresh_session_id", "fresh_run_id", "work_unit_id", "goal_ids", "niche_ids", "protect_ids", "claim_id", "lease_id", "fencing_token", "refreshed_base_main_sha", "authority_source", "authority_ceiling"]
   },
-  "next_safe_action": "Complete CP0 control-plane artifacts, review PR #5 as Director, then allocate non-overlapping W01 offer/economics/research scopes."
+  "next_safe_action": "Promote this post-merge reconciliation, then dispatch five non-overlapping frontier work units through durable issues/claims."
 }
