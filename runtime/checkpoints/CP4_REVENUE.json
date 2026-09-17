@@ -1,0 +1,32 @@
+{
+  "checkpoint": "CP4_REVENUE_LOOP_LIVE",
+  "status": "ACTIVE_PARALLEL_FRONTIER",
+  "opened_at": "2026-09-17T15:05:30+02:00",
+  "director": "AGT-OW-TL-001",
+  "baseline_main_sha": "6e073a1681d412129ab5f9c8f772ec107e097077",
+  "goal": "Create a canonical, observable and privacy-safe path from qualified enquiry to signed contract + deposit.",
+  "required_work_units": ["WU-OW-CP4-CRM-001", "WU-OW-WEB-W2-001"],
+  "dependency_order": ["CRM contract first", "Web W2 consumes CRM/attribution contract", "E2E lead path after both"],
+  "required_gates": {
+    "crm_tool_decision": false,
+    "canonical_lead_schema": false,
+    "pipeline_state_machine": false,
+    "sla": false,
+    "attribution_contract": false,
+    "privacy_boundary": false,
+    "web_form_contract": false,
+    "lead_e2e": false,
+    "duplicate_retry_safety": false,
+    "no_pii_in_analytics": true
+  },
+  "stop_conditions": [
+    "Web agent must not invent a competing lead schema before CRM contract lock.",
+    "Do not send raw PII to analytics/ad platforms outside a documented lawful integration.",
+    "Do not call a lead WON without the canonical won-condition approved by Mission Control.",
+    "Do not automate contract/pricing exceptions without human approval."
+  ],
+  "promotion_rule": "A synthetic/test lead can traverse landing → validated capture → CRM → qualification → consultation/proposal → contract/deposit state with attribution, idempotency and privacy checks observable end to end.",
+  "p0": [],
+  "p1": [],
+  "director_decision": "OPEN"
+}
