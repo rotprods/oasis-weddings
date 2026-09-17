@@ -2,13 +2,13 @@
   "schema_version": "1.0.0",
   "project_id": "PRJ-OW-001",
   "graph_id": "AGR-OW-001",
-  "mode": "BOOTSTRAP",
+  "mode": "READY_FOR_TEAM_LEAD_BINDING",
   "authority": {
     "repository": "rotprods/oasis-weddings",
     "default_branch": "main",
-    "last_observed_main_sha": "66b99a77d93de8708f298644075bd5e604e1c939",
+    "last_observed_main_sha": "fc9fc6d2a4358a698af935608a4dd95c09b82c35",
     "state_is_operational_truth": false,
-    "note": "Initial repository projection only; a future event/lease store may supersede it as live coordination authority."
+    "note": "Repository projection only; a future event/lease store may supersede it as live coordination authority."
   },
   "team_lead": {
     "agent_id": "AGT-OW-TL-001",
@@ -30,12 +30,14 @@
   "bootstrap": {
     "authority_source": "HUMAN_OVERRIDE",
     "scope": "agent-graph-bootstrap",
-    "branch": "agent/agent-graph-bootstrap",
+    "status": "PROMOTED",
+    "bootstrap_branch": "agent/agent-graph-bootstrap",
     "base_main_sha": "66b99a77d93de8708f298644075bd5e604e1c939",
+    "promotion_sha": "fc9fc6d2a4358a698af935608a4dd95c09b82c35",
     "executor_role": "AGT-OW-EXEC-GENERAL-001",
     "team_lead_was_live": false,
     "reason": "Explicit founder instruction to create the Agent Graph and establish the Team Lead hierarchy.",
-    "expires_on_scope_closure": true
+    "authority_expired": true
   },
   "writer_authorization_law": {
     "default": "READ_ONLY_UNTIL_CLAIMED",
@@ -55,5 +57,5 @@
       "authority_ceiling"
     ]
   },
-  "next_safe_action": "After this bootstrap change is reviewed and promoted, bind a fresh TEAM_LEAD session before parallel material execution. Until then, executors may research/read freely but shared writes require an explicit bounded HUMAN_OVERRIDE."
+  "next_safe_action": "Bind a fresh AGT-OW-TL-001 TEAM_LEAD session before parallel material execution. Until then, executors may research/read freely; shared writes require a new explicit bounded HUMAN_OVERRIDE or a valid RECOVERY_TAKEOVER."
 }
