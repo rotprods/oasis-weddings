@@ -1,30 +1,89 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "project_id": "PRJ-OW-001",
   "graph_id": "AGR-OW-001",
-  "mode": "READY_FOR_TEAM_LEAD_BINDING",
+  "mode": "TEAM_LEAD_BOUND_CP0_ACTIVE",
   "authority": {
     "repository": "rotprods/oasis-weddings",
     "default_branch": "main",
-    "last_observed_main_sha": "fc9fc6d2a4358a698af935608a4dd95c09b82c35",
+    "last_observed_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76",
     "state_is_operational_truth": false,
-    "note": "Repository projection only; a future event/lease store may supersede it as live coordination authority."
+    "note": "Repository projection of Mission Control state. Runtime/branch/PR reality remains higher authority."
   },
   "team_lead": {
     "agent_id": "AGT-OW-TL-001",
     "parent_human_id": "HUM-ROB-001",
     "aliases": ["PROJECT_DIRECTOR", "MISSION_CONTROL"],
-    "state": "UNBOUND",
-    "session_id": null,
-    "run_id": null,
-    "authority_ceiling": "PROJECT_ORCHESTRATION"
+    "state": "BOUND",
+    "session_id": "SES-OW-TL-20260917-001",
+    "run_id": "RUN-OW-GAUNTLET-20260917-001",
+    "correlation_id": "COR-OW-GAUNTLET-20260917-001",
+    "authority_source": "HUMAN_OVERRIDE",
+    "authority_ceiling": "PROJECT_ORCHESTRATION",
+    "binding_reason": "Founder explicitly instructed this assistant to act as supreme Project Director / Mission Control and execute the master GAUNTLET plan.",
+    "bound_at": "2026-09-17T14:55:00+02:00"
   },
-  "active_sessions": [],
-  "active_claims": [],
-  "active_leases": [],
-  "active_writers": [],
+  "active_sessions": [
+    {
+      "session_id": "SES-OW-TL-20260917-001",
+      "agent_id": "AGT-OW-TL-001",
+      "run_id": "RUN-OW-GAUNTLET-20260917-001",
+      "correlation_id": "COR-OW-GAUNTLET-20260917-001",
+      "state": "ACTIVE",
+      "branch": "agent/mission-control-runtime-v1",
+      "base_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76"
+    }
+  ],
+  "active_claims": [
+    {
+      "claim_id": "CLM-OW-TL-CP0-001",
+      "agent_id": "AGT-OW-TL-001",
+      "work_unit_id": "WU-OW-CP0-CONTROL-001",
+      "goal_ids": ["G-OW-0001", "G-OW-1500"],
+      "niche_ids": ["NIC-QA-001"],
+      "protect_ids": ["PROT-NORTHSTAR-001", "PROT-SINGLEWRITER-001", "PROT-EXACTHEAD-001", "PROT-TRUTH-001", "PROT-HUMAN-001"],
+      "scope": ["NORTH_STAR.md", "MEMORY.md", "runtime/WORK_LEDGER.json", "runtime/checkpoints/**", "runtime/agent-graph/STATE.json"],
+      "excluded_scope": ["src/**", "AGENTS-DESIGN.md", "package.json", "package-lock.json", ".github/workflows/web-foundation.yml"],
+      "state": "ACTIVE"
+    }
+  ],
+  "active_leases": [
+    {
+      "lease_id": "LSE-OW-TL-CP0-001",
+      "claim_id": "CLM-OW-TL-CP0-001",
+      "agent_id": "AGT-OW-TL-001",
+      "fencing_token": 1,
+      "state": "ACTIVE",
+      "authority_source": "HUMAN_OVERRIDE",
+      "authority_ceiling": "PROJECT_ORCHESTRATION",
+      "branch": "agent/mission-control-runtime-v1",
+      "base_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76"
+    }
+  ],
+  "active_writers": [
+    {
+      "agent_id": "AGT-OW-TL-001",
+      "claim_id": "CLM-OW-TL-CP0-001",
+      "lease_id": "LSE-OW-TL-CP0-001",
+      "fencing_token": 1,
+      "scope": "MISSION_CONTROL_CP0_CONTROL_PLANE",
+      "branch": "agent/mission-control-runtime-v1"
+    }
+  ],
+  "observed_external_work": [
+    {
+      "agent_id": "AGT-OW-EXEC-WEB-001",
+      "branch": "agent/web-design-assetsgraph",
+      "pr_number": 5,
+      "issue_number": 4,
+      "state": "DRAFT_AWAITING_DIRECTOR_REVIEW",
+      "scope": "WEB W0-W1 foundation + AGENTS-DESIGN + public route scaffold",
+      "head_sha": "fb9c88a2ec9f15499e708aa9665ce72e025ecaa9",
+      "collision_rule": "Do not mutate web-owned files from Mission Control branch."
+    }
+  ],
   "fencing": {
-    "last_issued_token": 0,
+    "last_issued_token": 1,
     "rule": "A takeover must use a strictly greater token than the predecessor token for the same scope."
   },
   "bootstrap": {
@@ -57,5 +116,5 @@
       "authority_ceiling"
     ]
   },
-  "next_safe_action": "Bind a fresh AGT-OW-TL-001 TEAM_LEAD session before parallel material execution. Until then, executors may research/read freely; shared writes require a new explicit bounded HUMAN_OVERRIDE or a valid RECOVERY_TAKEOVER."
+  "next_safe_action": "Complete CP0 control-plane artifacts, review PR #5 as Director, then allocate non-overlapping W01 offer/economics/research scopes."
 }

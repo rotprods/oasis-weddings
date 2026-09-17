@@ -1,0 +1,35 @@
+{
+  "checkpoint": "CP0_FOUNDATION_LOCK",
+  "status": "IN_REVIEW",
+  "opened_at": "2026-09-17T14:55:00+02:00",
+  "director": "AGT-OW-TL-001",
+  "baseline_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76",
+  "required_gates": {
+    "team_lead_bound": true,
+    "north_star_persisted": true,
+    "memory_policy_persisted": true,
+    "work_ledger_persisted": true,
+    "scope_collision_model": true,
+    "exact_head_model": true,
+    "death_safe_recovery": true,
+    "next_revenue_bound_frontier_identified": true
+  },
+  "open_items": [
+    "Promote Mission Control branch after exact-head/diff review.",
+    "Review and decide PR #5 web foundation promotion.",
+    "Run source/account inventory for portfolio, CRM, analytics and storage.",
+    "Open CP1 market/economics work on non-overlapping scopes."
+  ],
+  "known_unknowns": [
+    "Canonical offer/pricing",
+    "Actual portfolio inventory and publication rights",
+    "Current CRM/account configuration",
+    "Verified review corpus",
+    "Current venue/planner relationships",
+    "Production capacity and variable cost baseline"
+  ],
+  "promotion_rule": "CP0 passes when control-plane artifacts are on main, ownership is non-ambiguous, current open work is reconciled, and the next business-facing wave can execute without relying on chat memory.",
+  "p0": [],
+  "p1": [],
+  "director_decision": "PENDING_EXACT_HEAD_AND_PR_REVIEW"
+}
