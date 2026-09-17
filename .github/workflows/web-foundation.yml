@@ -1,0 +1,42 @@
+name: Web Foundation
+
+on:
+  push:
+    branches:
+      - agent/web-design-assetsgraph
+  pull_request:
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
+      - "next.config.ts"
+      - "next-env.d.ts"
+      - "src/**"
+      - ".github/workflows/web-foundation.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Production build
+        run: npm run build
