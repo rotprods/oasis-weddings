@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "PRJ-OW-001",
+  "updated_at": "2026-09-17T14:58:00+02:00",
+  "observed_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76",
+  "active_checkpoint": "CP0_FOUNDATION_LOCK",
+  "director": {
+    "agent_id": "AGT-OW-TL-001",
+    "session_id": "SES-OW-TL-20260917-001",
+    "run_id": "RUN-OW-GAUNTLET-20260917-001"
+  },
+  "work_units": [
+    {
+      "work_unit_id": "WU-OW-CP0-CONTROL-001",
+      "task_id": "TSK-OW-CP0-001",
+      "owner": "AGT-OW-TL-001",
+      "goal_ids": ["G-OW-0001", "G-OW-1500"],
+      "checkpoint": "CP0_FOUNDATION_LOCK",
+      "scope": "Mission Control binding + North Star + Memory + ledger + checkpoint state",
+      "branch": "agent/mission-control-runtime-v1",
+      "base_head": "662555023bb8b63e49c86678ab61c5bcb216cc76",
+      "hardness": "H3",
+      "status": "ACTIVE",
+      "dependencies": [],
+      "tests": ["exact-head compare", "JSON validity", "scope-collision review", "diff review"],
+      "promotion_gate": "CP0_CONTROL_PLANE",
+      "evidence": []
+    },
+    {
+      "work_unit_id": "WU-OW-WEB-001",
+      "task_id": "TSK-OW-WEB-W0W1",
+      "owner": "AGT-OW-EXEC-WEB-001",
+      "goal_ids": ["G-OW-0200", "G-OW-0500", "G-OW-1300"],
+      "checkpoint": "CP3_WEB_LIVE",
+      "scope": "Web design contract + Next.js public foundation W0/W1",
+      "branch": "agent/web-design-assetsgraph",
+      "pr_number": 5,
+      "issue_number": 4,
+      "base_head": "662555023bb8b63e49c86678ab61c5bcb216cc76",
+      "observed_head": "fb9c88a2ec9f15499e708aa9665ce72e025ecaa9",
+      "hardness": "H3",
+      "status": "DIRECTOR_REVIEW",
+      "dependencies": ["CP0 coordination authority"],
+      "tests": ["typecheck", "production build", "scope review", "SEO preproduction noindex", "a11y baseline", "diff review"],
+      "promotion_gate": "WEB_FOUNDATION_W0_W1",
+      "evidence": ["GitHub issue #4", "draft PR #5"]
+    },
+    {
+      "work_unit_id": "WU-OW-CP1-RESEARCH-001",
+      "task_id": "TSK-OW-MARKET-001",
+      "owner": null,
+      "goal_ids": ["G-OW-0100"],
+      "checkpoint": "CP1_OFFER_LOCK",
+      "scope": "Murcia/Spain competitor, customer voice and pricing evidence dataset",
+      "branch": null,
+      "base_head": null,
+      "hardness": "H2",
+      "status": "READY",
+      "dependencies": ["CP0 promotion"],
+      "tests": ["source provenance", "fact-vs-inference review", "no fabricated pricing"],
+      "promotion_gate": "MARKET_EVIDENCE_BASELINE",
+      "evidence": []
+    },
+    {
+      "work_unit_id": "WU-OW-CP1-FIN-001",
+      "task_id": "TSK-OW-ECON-001",
+      "owner": null,
+      "goal_ids": ["G-OW-0100", "G-OW-1200"],
+      "checkpoint": "CP1_OFFER_LOCK",
+      "scope": "Wedding package unit-economics model and pricing guardrails",
+      "branch": null,
+      "base_head": null,
+      "hardness": "H3",
+      "status": "BLOCKED_ON_REAL_COST_INPUTS",
+      "dependencies": ["production cost assumptions", "target offer architecture"],
+      "tests": ["margin formula", "scenario sensitivity", "capacity check"],
+      "promotion_gate": "UNIT_ECONOMICS_VALIDATED",
+      "evidence": []
+    },
+    {
+      "work_unit_id": "WU-OW-CP2-ASSET-001",
+      "task_id": "TSK-OW-ASSET-001",
+      "owner": null,
+      "goal_ids": ["G-OW-0500"],
+      "checkpoint": "CP2_PROOF_LOCK",
+      "scope": "Inventory actual portfolio, testimonials, venue evidence and publication rights",
+      "branch": null,
+      "base_head": null,
+      "hardness": "H4",
+      "status": "READY_FOR_SOURCE_DISCOVERY",
+      "dependencies": ["Drive/storage/account discovery"],
+      "tests": ["rights status explicit", "no private-media publication", "provenance"],
+      "promotion_gate": "PORTFOLIO_TRUTH_BASELINE",
+      "evidence": []
+    },
+    {
+      "work_unit_id": "WU-OW-CP4-CRM-001",
+      "task_id": "TSK-OW-CRM-001",
+      "owner": null,
+      "goal_ids": ["G-OW-0900", "G-OW-1000", "G-OW-1200"],
+      "checkpoint": "CP4_REVENUE_LOOP_LIVE",
+      "scope": "CRM/tool inventory and canonical lead lifecycle",
+      "branch": null,
+      "base_head": null,
+      "hardness": "H3",
+      "status": "READY",
+      "dependencies": ["web lead contract", "stack inventory"],
+      "tests": ["lead E2E", "attribution persistence", "privacy boundary"],
+      "promotion_gate": "LEAD_TO_DEPOSIT_E2E",
+      "evidence": []
+    }
+  ],
+  "collision_locks": [
+    {
+      "scope": ["src/**", "AGENTS-DESIGN.md", "package.json", "package-lock.json", ".github/workflows/web-foundation.yml"],
+      "owner": "AGT-OW-EXEC-WEB-001",
+      "state": "LOCKED_PENDING_PR5_DIRECTOR_REVIEW"
+    },
+    {
+      "scope": ["NORTH_STAR.md", "MEMORY.md", "runtime/WORK_LEDGER.json", "runtime/checkpoints/**", "runtime/agent-graph/STATE.json"],
+      "owner": "AGT-OW-TL-001",
+      "state": "LOCKED_CP0"
+    }
+  ]
+}
