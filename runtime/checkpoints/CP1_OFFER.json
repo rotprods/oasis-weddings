@@ -1,0 +1,27 @@
+{
+  "checkpoint": "CP1_OFFER_LOCK",
+  "status": "ACTIVE",
+  "opened_at": "2026-09-17T15:04:00+02:00",
+  "director": "AGT-OW-TL-001",
+  "baseline_main_sha": "6e073a1681d412129ab5f9c8f772ec107e097077",
+  "goal": "Lock an evidence-backed, differentiated offer with explicit unit economics and pricing guardrails.",
+  "required_work_units": ["WU-OW-CP1-RESEARCH-001", "WU-OW-CP1-FIN-001"],
+  "required_gates": {
+    "market_evidence_baseline": false,
+    "customer_voice_baseline": false,
+    "competitor_pricing_provenance": false,
+    "package_architecture": false,
+    "unit_economics": false,
+    "margin_guardrails": false,
+    "no_fabricated_claims": true
+  },
+  "stop_conditions": [
+    "Do not set canonical prices from competitor averages alone.",
+    "Do not scale paid acquisition until contribution economics are known.",
+    "Do not promote if real production-cost inputs are still entirely unknown; scenario models may guide discovery but are not canonical economics."
+  ],
+  "promotion_rule": "Offer architecture, positioning and pricing logic are evidence-backed; package contribution margins are computable; material assumptions are explicit; no P0/P1 remains.",
+  "p0": [],
+  "p1": [],
+  "director_decision": "OPEN"
+}

@@ -1,9 +1,12 @@
 {
   "checkpoint": "CP0_FOUNDATION_LOCK",
-  "status": "IN_REVIEW",
+  "status": "PROMOTED",
   "opened_at": "2026-09-17T14:55:00+02:00",
+  "promoted_at": "2026-09-17T15:03:00+02:00",
   "director": "AGT-OW-TL-001",
   "baseline_main_sha": "662555023bb8b63e49c86678ab61c5bcb216cc76",
+  "control_plane_promotion_sha": "f66f18069717c436d3e6c8295d36581e30d7dc2c",
+  "post_web_baseline_sha": "6e073a1681d412129ab5f9c8f772ec107e097077",
   "required_gates": {
     "team_lead_bound": true,
     "north_star_persisted": true,
@@ -12,24 +15,27 @@
     "scope_collision_model": true,
     "exact_head_model": true,
     "death_safe_recovery": true,
-    "next_revenue_bound_frontier_identified": true
+    "next_revenue_bound_frontier_identified": true,
+    "existing_material_work_reconciled": true
   },
-  "open_items": [
-    "Promote Mission Control branch after exact-head/diff review.",
-    "Review and decide PR #5 web foundation promotion.",
-    "Run source/account inventory for portfolio, CRM, analytics and storage.",
-    "Open CP1 market/economics work on non-overlapping scopes."
+  "resolved_items": [
+    "Mission Control control plane promoted via PR #6.",
+    "Web W0/W1 reviewed and promoted via PR #5.",
+    "Current main rebased to 6e073a1681d412129ab5f9c8f772ec107e097077.",
+    "Next work units separated into market/economics, portfolio truth, CRM contract and dependent Web W2."
   ],
-  "known_unknowns": [
-    "Canonical offer/pricing",
-    "Actual portfolio inventory and publication rights",
-    "Current CRM/account configuration",
-    "Verified review corpus",
-    "Current venue/planner relationships",
-    "Production capacity and variable cost baseline"
+  "deferred_to_later_checkpoints": [
+    "Canonical offer/pricing -> CP1",
+    "Actual portfolio inventory and publication rights -> CP2",
+    "Current CRM/account configuration -> CP4",
+    "Verified review corpus -> CP2/CP6",
+    "Current venue/planner relationships -> CP6/CP8",
+    "Production capacity and variable cost baseline -> CP1/CP9"
   ],
-  "promotion_rule": "CP0 passes when control-plane artifacts are on main, ownership is non-ambiguous, current open work is reconciled, and the next business-facing wave can execute without relying on chat memory.",
+  "promotion_rule": "Satisfied: control-plane artifacts are on main, Team Lead is explicitly bound, current material work was reconciled, collision boundaries are durable and the next business-facing frontier no longer depends on chat memory.",
   "p0": [],
   "p1": [],
-  "director_decision": "PENDING_EXACT_HEAD_AND_PR_REVIEW"
+  "director_decision": "PROMOTE",
+  "next_checkpoint": "CP1_OFFER_LOCK",
+  "parallel_frontiers": ["CP2_PROOF_LOCK", "CP4_REVENUE_LOOP_LIVE"]
 }
