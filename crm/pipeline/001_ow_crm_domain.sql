@@ -18,7 +18,7 @@ create table if not exists public.ow_leads (
   venue_city text null check (venue_city is null or length(venue_city) <= 120),
   venue_province text null check (venue_province is null or length(venue_province) <= 120),
   country_code text not null default 'ES' check (country_code ~ '^[A-Z]{2}$'),
-  service_interests text[] not null default '{}',
+  service_interests text[] not null default '{}' check (service_interests <@ ARRAY['photo','video','photo_video','post_wedding','pre_wedding','other']::text[]),
   budget_band text null check (budget_band is null or budget_band in ('unknown','under_1500','1500_2499','2500_3499','3500_4999','5000_plus')),
   status text not null default 'NEW' check (status in ('NEW','CONTACTED','QUALIFIED','DISCOVERY_BOOKED','DISCOVERY_DONE','PROPOSAL','VERBAL_YES','CONTRACT_SENT','DEPOSIT_PENDING','WON','LOST')),
   owner_id uuid null references auth.users(id),
