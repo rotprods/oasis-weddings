@@ -1,0 +1,78 @@
+{
+  "contract_version": "1.0.0",
+  "states": [
+    "NEW",
+    "CONTACTED",
+    "QUALIFIED",
+    "DISCOVERY_BOOKED",
+    "DISCOVERY_DONE",
+    "PROPOSAL",
+    "VERBAL_YES",
+    "CONTRACT_SENT",
+    "DEPOSIT_PENDING",
+    "WON",
+    "LOST"
+  ],
+  "terminal_states": ["WON", "LOST"],
+  "won_condition": {
+    "all": [
+      "contract_signed_at is not null",
+      "deposit_received_at is not null",
+      "deposit_amount_eur > 0"
+    ],
+    "exception": "deposit waiver or zero-deposit booking requires explicit Director-approved contract exception; do not auto-transition to WON"
+  },
+  "lost_reasons": [
+    "not_a_fit",
+    "budget",
+    "date_unavailable",
+    "location",
+    "service_mismatch",
+    "ghosted",
+    "competitor",
+    "duplicate",
+    "spam",
+    "cancelled_event",
+    "other"
+  ],
+  "actors": ["system", "sales", "admin", "founder"],
+  "transitions": [
+    {"from":"NEW","to":"CONTACTED","event":"lead_contacted","actors":["sales","admin","founder"],"preconditions":["first_human_response_at recorded"]},
+    {"from":"CONTACTED","to":"QUALIFIED","event":"lead_qualified","actors":["sales","admin","founder"],"preconditions":["wedding_date present","service_interests non-empty","contact channel valid"]},
+    {"from":"QUALIFIED","to":"DISCOVERY_BOOKED","event":"discovery_booked","actors":["sales","admin","founder","system"],"preconditions":["discovery appointment has canonical external or internal reference"]},
+    {"from":"DISCOVERY_BOOKED","to":"DISCOVERY_DONE","event":"discovery_completed","actors":["sales","admin","founder"],"preconditions":["meeting outcome recorded"]},
+    {"from":"DISCOVERY_BOOKED","to":"QUALIFIED","event":"discovery_cancelled","actors":["sales","admin","founder","system"],"preconditions":["appointment cancelled or expired without meeting"]},
+    {"from":"DISCOVERY_DONE","to":"PROPOSAL","event":"proposal_sent","actors":["sales","admin","founder"],"preconditions":["proposal reference and sent_at recorded"]},
+    {"from":"PROPOSAL","to":"VERBAL_YES","event":"verbal_yes_recorded","actors":["sales","admin","founder"],"preconditions":["customer acceptance intent recorded"]},
+    {"from":"VERBAL_YES","to":"CONTRACT_SENT","event":"contract_sent","actors":["sales","admin","founder","system"],"preconditions":["contract reference recorded"]},
+    {"from":"CONTRACT_SENT","to":"DEPOSIT_PENDING","event":"contract_signed","actors":["sales","admin","founder","system"],"preconditions":["contract_signed_at recorded"]},
+    {"from":"DEPOSIT_PENDING","to":"WON","event":"lead_won","actors":["admin","founder","system"],"preconditions":["contract_signed_at recorded","deposit_received_at recorded","deposit_amount_eur > 0"]},
+    {"from":"NEW","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"CONTACTED","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"QUALIFIED","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"DISCOVERY_BOOKED","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"DISCOVERY_DONE","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"PROPOSAL","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"VERBAL_YES","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"CONTRACT_SENT","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"DEPOSIT_PENDING","to":"LOST","event":"lead_lost","actors":["sales","admin","founder"],"preconditions":["loss_reason present"]},
+    {"from":"LOST","to":"CONTACTED","event":"lead_reopened","actors":["admin","founder"],"preconditions":["reopen_reason recorded"],"requires_human_override":true}
+  ],
+  "event_idempotency": {
+    "key": "idempotency_key",
+    "scope": ["business_id", "idempotency_key"],
+    "retries": "same key must be a no-op returning the prior event result"
+  },
+  "audit": {
+    "table": "public.ow_lead_events",
+    "append_only": true,
+    "immutable_events": [
+      "lead_created",
+      "lead_lost",
+      "lead_reopened",
+      "contract_signed",
+      "deposit_received",
+      "lead_won"
+    ]
+  }
+}
