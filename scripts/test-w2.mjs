@@ -179,6 +179,14 @@ ok(
   "form must preserve progressive POST fallback",
 );
 
+ok(
+  !formSource.includes("budgetOptions") &&
+    !formSource.includes('name="budget_band"') &&
+    !formSource.includes("1.500") &&
+    !formSource.includes("5.000"),
+  "public form must not expose price anchors before CP1 offer lock",
+);
+
 const registrySource = fs.readFileSync(
   path.join(root, "src/lib/page-registry.ts"),
   "utf8",
