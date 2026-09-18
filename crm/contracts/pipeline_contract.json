@@ -13,7 +13,8 @@
     "WON",
     "LOST"
   ],
-  "terminal_states": ["WON", "LOST"],
+  "terminal_states": ["WON"],
+  "reopenable_states": ["LOST"],
   "won_condition": {
     "all": [
       "contract_signed_at is not null",
