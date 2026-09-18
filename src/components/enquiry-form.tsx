@@ -24,15 +24,6 @@ const serviceOptions = [
   ["other", "Otro / aún no lo sabemos"],
 ] as const;
 
-const budgetOptions = [
-  ["unknown", "Prefiero hablarlo"],
-  ["under_1500", "Menos de 1.500 €"],
-  ["1500_2499", "1.500–2.499 €"],
-  ["2500_3499", "2.500–3.499 €"],
-  ["3500_4999", "3.500–4.999 €"],
-  ["5000_plus", "5.000 € o más"],
-] as const;
-
 function emitAnalytics(event: string) {
   window.dispatchEvent(
     new CustomEvent("ow:analytics", {
@@ -343,17 +334,6 @@ export function EnquiryForm({
           />
         </div>
 
-        <div className="form-field">
-          <label htmlFor="budget_band">Presupuesto orientativo · opcional</label>
-          <select id="budget_band" name="budget_band" defaultValue="">
-            <option value="">Sin indicar</option>
-            {budgetOptions.map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
       <div className="privacy-consent">
