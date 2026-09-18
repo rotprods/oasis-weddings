@@ -44,6 +44,13 @@ class CP4ContractTests(unittest.TestCase):
             self.assertTrue(transition["event"])
             self.assertTrue(transition["actors"])
 
+    def test_terminal_and_reopenable_states_are_consistent(self):
+        self.assertEqual(PIPE["terminal_states"], ["WON"])
+        self.assertIn("LOST", PIPE["reopenable_states"])
+        reopen = [t for t in PIPE["transitions"] if t["from"] == "LOST" and t["to"] == "CONTACTED"]
+        self.assertEqual(len(reopen), 1)
+        self.assertTrue(reopen[0].get("requires_human_override"))
+
     def test_won_requires_contract_and_deposit(self):
         won = " | ".join(PIPE["won_condition"]["all"])
         self.assertIn("contract_signed_at", won)
