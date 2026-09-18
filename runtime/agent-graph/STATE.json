@@ -1,23 +1,26 @@
 {
-  "schema_version": "1.3.0",
+  "schema_version": "1.4.0",
   "project_id": "PRJ-OW-001",
   "graph_id": "AGR-OW-001",
-  "mode": "CP1_CP2_CP4_DISPATCHED",
+  "mode": "CP1_CP2_WEB_W2_ACTIVE",
   "authority": {
     "repository": "rotprods/oasis-weddings",
     "default_branch": "main",
-    "last_observed_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
+    "last_observed_main_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c",
     "state_is_operational_truth": false,
     "note": "Repository projection of Mission Control state. Live GitHub/runtime truth outranks this projection when newer."
   },
   "team_lead": {
     "agent_id": "AGT-OW-TL-001",
     "parent_human_id": "HUM-ROB-001",
-    "aliases": ["PROJECT_DIRECTOR", "MISSION_CONTROL"],
+    "aliases": [
+      "PROJECT_DIRECTOR",
+      "MISSION_CONTROL"
+    ],
     "state": "BOUND",
-    "session_id": "SES-OW-TL-20260917-001",
-    "run_id": "RUN-OW-GAUNTLET-20260917-001",
-    "correlation_id": "COR-OW-GAUNTLET-20260917-001",
+    "session_id": "SES-OW-TL-20260918-004",
+    "run_id": "RUN-OW-GAUNTLET-20260918-004",
+    "correlation_id": "COR-OW-GAUNTLET-20260918-004",
     "authority_source": "HUMAN_OVERRIDE",
     "authority_ceiling": "PROJECT_ORCHESTRATION",
     "binding_reason": "Founder explicitly instructed this assistant to act as supreme Project Director / Mission Control and execute the master GAUNTLET plan.",
@@ -25,49 +28,71 @@
   },
   "active_sessions": [
     {
-      "session_id": "SES-OW-TL-20260917-001",
+      "session_id": "SES-OW-TL-20260918-004",
       "agent_id": "AGT-OW-TL-001",
-      "run_id": "RUN-OW-GAUNTLET-20260917-001",
-      "correlation_id": "COR-OW-GAUNTLET-20260917-001",
+      "run_id": "RUN-OW-GAUNTLET-20260918-004",
+      "correlation_id": "COR-OW-GAUNTLET-20260918-004",
       "state": "ACTIVE",
-      "branch": "agent/mission-control-dispatch-v3",
-      "base_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6"
+      "branch": "agent/mission-control-reconcile-v4",
+      "base_main_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c"
     }
   ],
   "active_claims": [
     {
-      "claim_id": "CLM-OW-TL-DISPATCH-003",
+      "claim_id": "CLM-OW-TL-RECON-004",
       "agent_id": "AGT-OW-TL-001",
-      "work_unit_id": "WU-OW-MC-DISPATCH-003",
-      "goal_ids": ["G-OW-0001", "G-OW-1500"],
-      "niche_ids": ["NIC-QA-001"],
-      "protect_ids": ["PROT-NORTHSTAR-001", "PROT-SINGLEWRITER-001", "PROT-EXACTHEAD-001", "PROT-TRUTH-001", "PROT-HUMAN-001"],
-      "scope": ["runtime/agent-graph/STATE.json", "runtime/WORK_LEDGER.json", "runtime/checkpoints/**"],
-      "excluded_scope": ["research/**", "finance/**", "analytics/economics/**", "portfolio/**", "crm/**", "src/**"],
+      "work_unit_id": "WU-OW-MC-RECON-004",
+      "goal_ids": [
+        "G-OW-0001",
+        "G-OW-1500"
+      ],
+      "niche_ids": [
+        "NIC-QA-001"
+      ],
+      "protect_ids": [
+        "PROT-NORTHSTAR-001",
+        "PROT-SINGLEWRITER-001",
+        "PROT-EXACTHEAD-001",
+        "PROT-TRUTH-001",
+        "PROT-HUMAN-001"
+      ],
+      "scope": [
+        "runtime/agent-graph/STATE.json",
+        "runtime/WORK_LEDGER.json",
+        "runtime/checkpoints/**"
+      ],
+      "excluded_scope": [
+        "research/**",
+        "finance/**",
+        "analytics/economics/**",
+        "portfolio/**",
+        "crm/**",
+        "src/**"
+      ],
       "state": "ACTIVE"
     }
   ],
   "active_leases": [
     {
-      "lease_id": "LSE-OW-TL-DISPATCH-003",
-      "claim_id": "CLM-OW-TL-DISPATCH-003",
+      "lease_id": "LSE-OW-TL-RECON-004",
+      "claim_id": "CLM-OW-TL-RECON-004",
       "agent_id": "AGT-OW-TL-001",
-      "fencing_token": 3,
+      "fencing_token": 4,
       "state": "ACTIVE",
-      "authority_source": "TEAM_LEAD_CLAIM",
+      "authority_source": "HUMAN_OVERRIDE",
       "authority_ceiling": "PROJECT_ORCHESTRATION",
-      "branch": "agent/mission-control-dispatch-v3",
-      "base_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6"
+      "branch": "agent/mission-control-reconcile-v4",
+      "base_main_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c"
     }
   ],
   "active_writers": [
     {
       "agent_id": "AGT-OW-TL-001",
-      "claim_id": "CLM-OW-TL-DISPATCH-003",
-      "lease_id": "LSE-OW-TL-DISPATCH-003",
-      "fencing_token": 3,
-      "scope": "MISSION_CONTROL_FRONTIER_DISPATCH",
-      "branch": "agent/mission-control-dispatch-v3"
+      "claim_id": "CLM-OW-TL-RECON-004",
+      "lease_id": "LSE-OW-TL-RECON-004",
+      "fencing_token": 4,
+      "scope": "MISSION_CONTROL_RECONCILIATION_V4",
+      "branch": "agent/mission-control-reconcile-v4"
     }
   ],
   "promoted_work": [
@@ -90,6 +115,23 @@
       "status": "PROMOTED",
       "pr_number": 7,
       "promotion_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6"
+    },
+    {
+      "work_unit_id": "WU-OW-CP4-CRM-001",
+      "agent_id": "AGT-OW-TL-001",
+      "status": "PROMOTED",
+      "issue_number": 12,
+      "pr_number": 14,
+      "promotion_sha": "932395bc667b1b36964b381060444389e48c4d8c"
+    },
+    {
+      "work_unit_id": "WU-OW-CP4-CAPTURE-002",
+      "agent_id": "AGT-OW-TL-001",
+      "status": "PROMOTED_LIVE_VERIFIED",
+      "issue_number": 15,
+      "pr_number": 16,
+      "promotion_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c",
+      "production_system": "Supabase oasis-prod/public.ow_capture_lead"
     }
   ],
   "dispatched_frontier": [
@@ -98,7 +140,7 @@
       "preferred_agent_id": "AGT-OW-EXEC-POS-001",
       "issue_number": 8,
       "branch": "agent/cp1-market-intelligence",
-      "base_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
+      "base_main_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c",
       "scope": "research/market/** + research/competitors/** + research/customer-voice/**",
       "hardness": "H2",
       "state": "DISPATCHED_AWAITING_CLAIM"
@@ -108,7 +150,7 @@
       "preferred_agent_id": "AGT-OW-EXEC-ANL-001",
       "issue_number": 9,
       "branch": "agent/cp1-unit-economics",
-      "base_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
+      "base_main_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c",
       "scope": "finance/unit-economics/** + analytics/economics/**",
       "hardness": "H3",
       "state": "DISPATCHED_AWAITING_CLAIM"
@@ -118,31 +160,23 @@
       "preferred_agent_id": "AGT-OW-EXEC-PORT-001",
       "issue_number": 10,
       "branch": "agent/cp2-portfolio-rights",
-      "base_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
+      "base_main_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c",
       "scope": "portfolio/inventory/** + portfolio/rights/** + portfolio/coverage/**",
       "hardness": "H4",
       "state": "DISPATCHED_AWAITING_CLAIM"
     },
     {
-      "work_unit_id": "WU-OW-CP4-CRM-001",
-      "preferred_agent_id": "AGT-OW-EXEC-CRM-001",
-      "issue_number": 12,
-      "branch": "agent/cp4-crm-contract",
-      "base_main_sha": "225ca0966488796eb29e97ed5bd61ad78ae388f6",
-      "scope": "crm/contracts/** + crm/pipeline/** + crm/tooling/** + analytics/contracts/** (attribution contract only)",
-      "hardness": "H3",
-      "state": "DISPATCHED_AWAITING_CLAIM"
+      "work_unit_id": "WU-OW-WEB-W2-001",
+      "preferred_agent_id": "AGT-OW-EXEC-WEB-001",
+      "issue_number": 17,
+      "branch": "agent/web-w2-lead-capture",
+      "base_main_sha": "3e8e212ffe2512e61e2523dabf45ee85e04ef08c",
+      "scope": "public enquiry form + validation + privacy UI + server-only ow_capture_lead consumption + non-PII analytics",
+      "hardness": "H4",
+      "state": "DISPATCHED_READY"
     }
   ],
   "blocked_frontier": [
-    {
-      "work_unit_id": "WU-OW-WEB-W2-001",
-      "preferred_agent_id": "AGT-OW-EXEC-WEB-001",
-      "scope": "conversion form + validation + privacy + CRM/attribution contract consumption",
-      "hardness": "H4",
-      "state": "BLOCKED_ON_CRM_CONTRACT",
-      "unblock_condition": "Mission Control accepts WU-OW-CP4-CRM-001 contract."
-    },
     {
       "work_unit_id": "WU-OW-MC-RUNTIME-001",
       "preferred_agent_id": "AGT-OW-EXEC-GENERAL-001",
@@ -160,13 +194,68 @@
     }
   ],
   "fencing": {
-    "last_issued_token": 3,
+    "last_issued_token": 4,
     "rule": "A takeover must use a strictly greater token than the predecessor token for the same scope."
   },
   "writer_authorization_law": {
     "default": "READ_ONLY_UNTIL_CLAIMED",
-    "allowed_authority_sources": ["TEAM_LEAD_CLAIM", "HUMAN_OVERRIDE", "RECOVERY_TAKEOVER"],
-    "material_write_requires": ["fresh_session_id", "fresh_run_id", "work_unit_id", "goal_ids", "niche_ids", "protect_ids", "claim_id", "lease_id", "fencing_token", "refreshed_base_main_sha", "authority_source", "authority_ceiling"]
+    "allowed_authority_sources": [
+      "TEAM_LEAD_CLAIM",
+      "HUMAN_OVERRIDE",
+      "RECOVERY_TAKEOVER"
+    ],
+    "material_write_requires": [
+      "fresh_session_id",
+      "fresh_run_id",
+      "work_unit_id",
+      "goal_ids",
+      "niche_ids",
+      "protect_ids",
+      "claim_id",
+      "lease_id",
+      "fencing_token",
+      "refreshed_base_main_sha",
+      "authority_source",
+      "authority_ceiling"
+    ]
   },
-  "next_safe_action": "Promote this dispatch reconciliation, then monitor worker claims/branches; review first returned evidence pack. Web W2 remains blocked until CRM contract acceptance."
+  "next_safe_action": "Promote Mission Control reconcile v4, then execute Web W2 issue #17 from exact-head branch agent/web-w2-lead-capture while CP1/CP2 remain isolated and ready.",
+  "recovery_history": [
+    {
+      "work_unit_id": "WU-OW-MC-RECON-004",
+      "recovered_at": "2026-09-18T13:31:00+02:00",
+      "authority_source": "HUMAN_OVERRIDE_CONTINUATION",
+      "predecessor_session_id": "SES-OW-TL-20260917-001",
+      "predecessor_claim_id": "CLM-OW-TL-DISPATCH-003",
+      "predecessor_lease_id": "LSE-OW-TL-DISPATCH-003",
+      "predecessor_fencing_token": 3,
+      "successor_session_id": "SES-OW-TL-20260918-004",
+      "successor_claim_id": "CLM-OW-TL-RECON-004",
+      "successor_lease_id": "LSE-OW-TL-RECON-004",
+      "successor_fencing_token": 4,
+      "terminal_state": "SUPERSEDED_BY_AUTHORIZED_RECOVERY"
+    }
+  ],
+  "operational_truth": {
+    "crm": {
+      "status": "LIVE_VERIFIED",
+      "supabase_project": "oasis-prod",
+      "business_slug": "oasis-weddings",
+      "tables": [
+        "ow_leads",
+        "ow_lead_attribution",
+        "ow_lead_consents",
+        "ow_lead_events"
+      ],
+      "capture_rpc": "public.ow_capture_lead",
+      "capture_acl": {
+        "public": false,
+        "anon": false,
+        "authenticated": false,
+        "service_role": true
+      },
+      "contract_pr": 14,
+      "capture_pr": 16
+    }
+  }
 }
