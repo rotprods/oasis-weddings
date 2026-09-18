@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { createRequire } from "node:module";
 import vm from "node:vm";
 import ts from "typescript";
 
 const root = process.cwd();
+const require = createRequire(import.meta.url);
 let passed = 0;
 
 function ok(condition, message) {
