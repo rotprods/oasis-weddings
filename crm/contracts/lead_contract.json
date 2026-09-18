@@ -22,8 +22,7 @@
     "partner_first_name",
     "contact_email",
     "contact_phone",
-    "venue_name",
-    "notes"
+    "venue_name"
   ],
   "attribution_fields": [
     "landing_page",
