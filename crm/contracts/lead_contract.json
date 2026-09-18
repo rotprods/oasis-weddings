@@ -1,0 +1,89 @@
+{
+  "contract_version": "1.0.0",
+  "entity": "ow_lead",
+  "source_of_truth": "Supabase oasis-prod isolated OASIS WEDDINGS domain",
+  "storage_table": "public.ow_leads",
+  "idempotency": {
+    "key": "submission_key",
+    "scope": ["business_id", "submission_key"],
+    "on_duplicate": "return_existing_lead_without_creating_a_second_row",
+    "identity_duplicates": "never_auto_merge_by_email_or_phone; flag for human review"
+  },
+  "required_fields": [
+    "submission_key",
+    "contact_first_name",
+    "contact_email",
+    "wedding_date",
+    "service_interests",
+    "privacy_consent"
+  ],
+  "pii_fields": [
+    "contact_first_name",
+    "partner_first_name",
+    "contact_email",
+    "contact_phone",
+    "venue_name",
+    "notes"
+  ],
+  "attribution_fields": [
+    "landing_page",
+    "referrer",
+    "first_source",
+    "first_medium",
+    "first_campaign",
+    "first_term",
+    "first_content",
+    "last_source",
+    "last_medium",
+    "last_campaign",
+    "last_term",
+    "last_content",
+    "google_click_id",
+    "meta_click_id"
+  ],
+  "fields": {
+    "lead_id": {"type": "uuid", "server_generated": true, "mutable": false},
+    "business_id": {"type": "uuid", "server_only": true, "mutable": false},
+    "submission_key": {"type": "string", "server_validated": true, "mutable": false, "max_length": 128},
+    "created_at": {"type": "timestamp", "server_generated": true, "mutable": false},
+    "updated_at": {"type": "timestamp", "server_generated": true, "mutable": true},
+    "contact_first_name": {"type": "string", "pii": true, "max_length": 120},
+    "partner_first_name": {"type": "string", "pii": true, "nullable": true, "max_length": 120},
+    "contact_email": {"type": "email", "pii": true, "max_length": 320},
+    "contact_phone": {"type": "string", "pii": true, "nullable": true, "max_length": 40},
+    "wedding_date": {"type": "date", "nullable": false},
+    "venue_name": {"type": "string", "pii": true, "nullable": true, "max_length": 200},
+    "venue_city": {"type": "string", "nullable": true, "max_length": 120},
+    "venue_province": {"type": "string", "nullable": true, "max_length": 120},
+    "country_code": {"type": "string", "default": "ES", "max_length": 2},
+    "service_interests": {"type": "string_array", "allowed": ["photo", "video", "photo_video", "post_wedding", "pre_wedding", "other"]},
+    "budget_band": {"type": "enum", "nullable": true, "allowed": ["unknown", "under_1500", "1500_2499", "2500_3499", "3500_4999", "5000_plus"]},
+    "status": {"type": "enum", "default": "NEW", "allowed": ["NEW", "CONTACTED", "QUALIFIED", "DISCOVERY_BOOKED", "DISCOVERY_DONE", "PROPOSAL", "VERBAL_YES", "CONTRACT_SENT", "DEPOSIT_PENDING", "WON", "LOST"]},
+    "owner_id": {"type": "uuid", "nullable": true, "server_only": true},
+    "lead_score": {"type": "integer", "nullable": true, "min": 0, "max": 100, "server_only": true},
+    "qualification": {"type": "json", "nullable": true, "server_only": true},
+    "loss_reason": {"type": "enum", "nullable": true, "allowed": ["not_a_fit", "budget", "date_unavailable", "location", "service_mismatch", "ghosted", "competitor", "duplicate", "spam", "cancelled_event", "other"]},
+    "loss_notes": {"type": "string", "nullable": true, "server_only": true, "max_length": 1000},
+    "duplicate_of_lead_id": {"type": "uuid", "nullable": true, "server_only": true},
+    "contract_signed_at": {"type": "timestamp", "nullable": true, "server_only": true},
+    "deposit_received_at": {"type": "timestamp", "nullable": true, "server_only": true},
+    "deposit_amount_eur": {"type": "decimal", "nullable": true, "server_only": true, "min": 0},
+    "booking_value_eur": {"type": "decimal", "nullable": true, "server_only": true, "min": 0},
+    "privacy_consent": {"type": "boolean", "write_to": "public.ow_lead_consents", "purpose": "privacy_processing"}
+  },
+  "server_boundary": {
+    "client_must_not_send": [
+      "business_id",
+      "owner_id",
+      "lead_score",
+      "qualification",
+      "loss_reason",
+      "contract_signed_at",
+      "deposit_received_at",
+      "deposit_amount_eur",
+      "booking_value_eur"
+    ],
+    "server_sets_business_id_from_configuration": true,
+    "service_role_secret_client_exposure": "forbidden"
+  }
+}
