@@ -1,5 +1,5 @@
 import { Buffer } from "node:buffer";
-import { createHash, randomBytes } from "node:crypto";
+import { createHash, randomBytes, randomUUID } from "node:crypto";
 import {
   MAX_LEAD_BODY_BYTES,
   isHoneypotFilled,
@@ -225,7 +225,7 @@ export async function POST(request: Request): Promise<Response> {
       error instanceof LeadCaptureUpstreamError ? error.status : 500;
 
     console.error("ow_lead_capture_failed", {
-      requestId: crypto.randomUUID(),
+      requestId: randomUUID(),
       upstreamStatus: status,
     });
 
