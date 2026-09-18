@@ -32,6 +32,10 @@ class CP4ContractTests(unittest.TestCase):
         self.assertNotIn("contact_email", attribution)
         self.assertNotIn("contact_phone", attribution)
 
+    def test_declared_pii_fields_exist_in_contract(self):
+        fields = set(LEAD["fields"])
+        self.assertTrue(set(LEAD["pii_fields"]).issubset(fields))
+
     def test_state_machine_targets_known_states(self):
         states = set(PIPE["states"])
         for transition in PIPE["transitions"]:
@@ -56,6 +60,7 @@ class CP4ContractTests(unittest.TestCase):
         self.assertIn("create table if not exists public.ow_leads", SQL.lower())
         self.assertNotIn("create table if not exists public.leads", SQL.lower())
         self.assertNotIn("alter table public.leads", SQL.lower())
+        self.assertIn("service_interests <@ array['photo','video','photo_video','post_wedding','pre_wedding','other']::text[]", SQL.lower())
 
     def test_ddl_has_idempotency_and_rls(self):
         lower = SQL.lower()
