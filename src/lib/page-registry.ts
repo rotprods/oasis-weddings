@@ -271,7 +271,7 @@ export const pageRegistry = {
     title: "Cuéntanos qué estáis imaginando.",
     description: "Consulta de disponibilidad para fotografía y cine de boda con OASIS WEDDINGS.",
     intro:
-      "La interfaz de conversión está reservada para un formulario breve: fecha, lugar, servicio, contacto y mensaje. El envío real no se activará hasta conectar validación, privacidad, CRM y atribución de forma verificable.",
+      "La ruta de disponibilidad tiene una implementación dedicada y fail-closed: validación, privacidad, CRM e idempotencia deben estar operativos antes de aceptar un envío.",
     sections: [
       {
         eyebrow: "Conversión",
@@ -289,7 +289,7 @@ export const pageRegistry = {
     title: "El siguiente paso debe ser igual de claro.",
     description: "Estado de confirmación de una futura consulta de disponibilidad de OASIS WEDDINGS.",
     intro:
-      "Esta ruta permanecerá fuera de indexación y solo se utilizará después de una conversión real. Durante W1 existe como contrato de navegación, no como confirmación de un lead inexistente.",
+      "La ruta de confirmación solo afirma que una consulta fue recibida cuando llega desde un envío completado. Una visita directa no simula una conversión.",
     sections: [],
     ctaLabel: "Volver al inicio",
     ctaHref: "/",
@@ -299,7 +299,11 @@ export const pageRegistry = {
 
 export type TopLevelSlug = keyof typeof pageRegistry;
 
-export const topLevelSlugs = Object.keys(pageRegistry) as TopLevelSlug[];
+const dedicatedTopLevelRoutes = new Set<TopLevelSlug>(["disponibilidad", "gracias"]);
+
+export const topLevelSlugs = Object.keys(pageRegistry).filter(
+  (slug) => !dedicatedTopLevelRoutes.has(slug as TopLevelSlug),
+) as TopLevelSlug[];
 
 export function getPageDefinition(slug: string): PageDefinition | undefined {
   return pageRegistry[slug as TopLevelSlug];
