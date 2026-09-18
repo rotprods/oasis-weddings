@@ -12,6 +12,7 @@ on:
       - "next.config.ts"
       - "next-env.d.ts"
       - "src/**"
+      - "scripts/**"
       - ".github/workflows/web-foundation.yml"
 
 permissions:
@@ -34,6 +35,9 @@ jobs:
 
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+
+      - name: W2 contract tests
+        run: npm run test:w2
 
       - name: Typecheck
         run: npm run typecheck
