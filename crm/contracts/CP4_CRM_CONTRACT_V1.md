@@ -201,3 +201,22 @@ Verification command once checked out:
 ```bash
 python -m unittest crm.tooling.test_cp4_contract -v
 ```
+
+
+## 12. Atomic capture primitive
+
+Web W2 must call the promoted server-side database primitive `public.ow_capture_lead` rather than issuing independent writes to the four `ow_*` tables.
+
+Properties:
+
+- one PostgreSQL transaction covers lead + attribution + privacy-processing consent + `lead_created` audit event;
+- `(business_id, submission_key)` is the idempotency boundary;
+- a retry returns the existing lead with `created=false` and creates no duplicate consent/event rows;
+- the RPC is `SECURITY DEFINER` with fixed `search_path`;
+- `EXECUTE` is revoked from `PUBLIC`, `anon` and `authenticated`, and granted only to `service_role`;
+- the service-role credential remains server-side;
+- `business_id` is supplied only by trusted server configuration, never accepted as browser authority.
+
+Migration: `crm/pipeline/002_ow_capture_lead_rpc.sql`.
+
+Production promotion requires privilege inspection plus a live transactional smoke test proving first capture, retry idempotency and zero residual synthetic rows after rollback.
