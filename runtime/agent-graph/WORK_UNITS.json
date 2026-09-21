@@ -1,0 +1,262 @@
+[
+  {
+    "work_unit_id": "WU-OW-INTEL-001",
+    "title": "Build 59-site competitive intelligence dataset",
+    "status": "CLAIMABLE",
+    "priority": 100,
+    "impact": 10,
+    "goal_ids": ["G-OW-0100", "G-OW-0300", "G-OW-0400"],
+    "workstream_id": "WS-OW-INTEL-001",
+    "niche_ids": ["NIC-POSITIONING-001", "NIC-SEO-001", "NIC-GEO-001", "NIC-CONTENT-001"],
+    "protect_ids": ["PROT-TRUTH-001", "PROT-NOSPAM-001", "PROT-OUTCOMEFIRST-001"],
+    "dependencies": [],
+    "resource_scopes": ["research/competitors/**"],
+    "semantic_scopes": ["competitive-intelligence:59-sites"],
+    "success_criteria": [
+      "59 named sites stored with canonical domain and evidence source",
+      "page-type, SEO/GEO, authority, conversion and portfolio fields populated or explicitly UNKNOWN",
+      "patterns and gaps trace back to source evidence"
+    ],
+    "next_safe_action": "Crawl and normalize the first evidence-backed competitor batch."
+  },
+  {
+    "work_unit_id": "WU-OW-SERP-001",
+    "title": "Map Murcia wedding demand and SERP intent graph",
+    "status": "CLAIMABLE",
+    "priority": 98,
+    "impact": 10,
+    "goal_ids": ["G-OW-0300", "G-OW-0700"],
+    "workstream_id": "WS-OW-INTEL-001",
+    "niche_ids": ["NIC-SEO-001", "NIC-LOCAL-001", "NIC-ANALYTICS-001"],
+    "protect_ids": ["PROT-TRUTH-001", "PROT-NOSPAM-001", "PROT-NORTHSTAR-001"],
+    "dependencies": [],
+    "resource_scopes": ["research/serp/**"],
+    "semantic_scopes": ["search-demand:murcia-weddings"],
+    "success_criteria": [
+      "transactional, commercial, venue and informational queries classified",
+      "current SERP competitors and result types evidenced",
+      "query -> intent -> page-type -> goal mapping produced"
+    ],
+    "next_safe_action": "Capture high-intent Murcia photo/video wedding queries and current SERPs."
+  },
+  {
+    "work_unit_id": "WU-OW-ENTITY-001",
+    "title": "Establish canonical OASIS business entity truth",
+    "status": "CLAIMABLE",
+    "priority": 96,
+    "impact": 10,
+    "goal_ids": ["G-OW-0100", "G-OW-0200", "G-OW-0400", "G-OW-0700"],
+    "workstream_id": "WS-OW-WEB-001",
+    "niche_ids": ["NIC-POSITIONING-001", "NIC-WEB-001", "NIC-GEO-001", "NIC-LOCAL-001"],
+    "protect_ids": ["PROT-TRUTH-001", "PROT-HUMAN-001", "PROT-SEO-001"],
+    "dependencies": [],
+    "resource_scopes": ["data/entities/oasis/**"],
+    "semantic_scopes": ["entity:oasis-weddings"],
+    "success_criteria": [
+      "canonical brand, service area, contact, people and service facts separated from unknowns",
+      "every public claim has a durable evidence pointer",
+      "no invented experience, award, review, pricing or venue claim"
+    ],
+    "next_safe_action": "Inventory verified company facts and type unresolved fields as UNKNOWN."
+  },
+  {
+    "work_unit_id": "WU-OW-PORTFOLIO-001",
+    "title": "Inventory permissioned wedding portfolio and film assets",
+    "status": "CLAIMABLE",
+    "priority": 94,
+    "impact": 10,
+    "goal_ids": ["G-OW-0500", "G-OW-0600"],
+    "workstream_id": "WS-OW-PORTFOLIO-001",
+    "niche_ids": ["NIC-PORTFOLIO-001", "NIC-CONTENT-001"],
+    "protect_ids": ["PROT-PRIVACY-001", "PROT-TRUTH-001"],
+    "dependencies": [],
+    "resource_scopes": ["data/portfolio/**"],
+    "semantic_scopes": ["portfolio:source-inventory"],
+    "success_criteria": [
+      "candidate photo/film assets inventoried without copying private media into public Git",
+      "publication-rights status explicit per asset/wedding",
+      "venue/location/service relationships captured where evidenced"
+    ],
+    "next_safe_action": "Build a metadata-only inventory and permission status map."
+  },
+  {
+    "work_unit_id": "WU-OW-OFFER-001",
+    "title": "Define evidence-backed offer and package architecture",
+    "status": "CLAIMABLE",
+    "priority": 91,
+    "impact": 9,
+    "goal_ids": ["G-OW-0100", "G-OW-0900"],
+    "workstream_id": "WS-OW-REVENUE-001",
+    "niche_ids": ["NIC-POSITIONING-001", "NIC-SALES-001", "NIC-MARKETING-001"],
+    "protect_ids": ["PROT-TRUTH-001", "PROT-NORTHSTAR-001", "PROT-HUMAN-001"],
+    "dependencies": ["WU-OW-INTEL-001", "WU-OW-ENTITY-001"],
+    "resource_scopes": ["marketing/offer/**"],
+    "semantic_scopes": ["offer:photo-film-packages"],
+    "success_criteria": [
+      "Photography, Film and Photo+Film offer hierarchy defined",
+      "add-ons and qualification logic separated from unsupported pricing claims",
+      "offer maps directly to sales and website CTAs"
+    ],
+    "next_safe_action": "Synthesize competitor evidence and verified operating facts into the smallest viable offer."
+  },
+  {
+    "work_unit_id": "WU-OW-LOCAL-001",
+    "title": "Build Murcia venue and local authority graph",
+    "status": "CLAIMABLE",
+    "priority": 90,
+    "impact": 9,
+    "goal_ids": ["G-OW-0700", "G-OW-1400", "G-OW-0600"],
+    "workstream_id": "WS-OW-LOCAL-001",
+    "niche_ids": ["NIC-LOCAL-001", "NIC-AUTHORITY-001", "NIC-CONTENT-001", "NIC-SEO-001"],
+    "protect_ids": ["PROT-TRUTH-001", "PROT-NOSPAM-001"],
+    "dependencies": ["WU-OW-SERP-001"],
+    "resource_scopes": ["research/venues/**"],
+    "semantic_scopes": ["local-authority:murcia-venues"],
+    "success_criteria": [
+      "priority Murcia/Cartagena/Costa Calida venues mapped",
+      "venue pages are proposed only where unique evidence can exist",
+      "vendor/venue/PR relationship opportunities are evidence-backed"
+    ],
+    "next_safe_action": "Map high-value venues from current search demand and real portfolio evidence."
+  },
+  {
+    "work_unit_id": "WU-OW-WEB-IA-001",
+    "title": "Freeze money-site information architecture",
+    "status": "CLAIMABLE",
+    "priority": 89,
+    "impact": 10,
+    "goal_ids": ["G-OW-0200", "G-OW-0300", "G-OW-0400"],
+    "workstream_id": "WS-OW-WEB-001",
+    "niche_ids": ["NIC-WEB-001", "NIC-SEO-001", "NIC-GEO-001"],
+    "protect_ids": ["PROT-SEO-001", "PROT-A11Y-001", "PROT-NOSPAM-001", "PROT-OUTCOMEFIRST-001"],
+    "dependencies": ["WU-OW-INTEL-001", "WU-OW-SERP-001", "WU-OW-ENTITY-001"],
+    "resource_scopes": ["docs/web-ia/**", "src/lib/page-registry.ts"],
+    "semantic_scopes": ["web:information-architecture"],
+    "success_criteria": [
+      "each planned indexable page has unique intent and evidence basis",
+      "money, venue, wedding, film and guide page types are connected by internal-link rules",
+      "no doorway-page expansion is accepted"
+    ],
+    "next_safe_action": "Reconcile the live web branch against competitor/SERP/entity evidence before freezing routes."
+  },
+  {
+    "work_unit_id": "WU-OW-GEO-001",
+    "title": "Establish AI-discovery benchmark and citation tracking",
+    "status": "CLAIMABLE",
+    "priority": 84,
+    "impact": 8,
+    "goal_ids": ["G-OW-0400", "G-OW-1200"],
+    "workstream_id": "WS-OW-INTEL-001",
+    "niche_ids": ["NIC-GEO-001", "NIC-ANALYTICS-001", "NIC-SEO-001"],
+    "protect_ids": ["PROT-TRUTH-001", "PROT-SEO-001", "PROT-NOSPAM-001"],
+    "dependencies": ["WU-OW-INTEL-001", "WU-OW-SERP-001"],
+    "resource_scopes": ["research/geo/**"],
+    "semantic_scopes": ["ai-discovery:benchmark"],
+    "success_criteria": [
+      "stable question set for AI-assisted search defined",
+      "brand mentions, cited URLs and competitors are recorded with date/engine",
+      "no claim is made that llms.txt or schema guarantees AI ranking"
+    ],
+    "next_safe_action": "Create the baseline query suite and measurement schema."
+  },
+  {
+    "work_unit_id": "WU-OW-CRM-001",
+    "title": "Define qualified-lead CRM pipeline and attribution contract",
+    "status": "CLAIMABLE",
+    "priority": 82,
+    "impact": 10,
+    "goal_ids": ["G-OW-0900", "G-OW-1000", "G-OW-1200"],
+    "workstream_id": "WS-OW-REVENUE-001",
+    "niche_ids": ["NIC-CRM-001", "NIC-SALES-001", "NIC-ANALYTICS-001"],
+    "protect_ids": ["PROT-PRIVACY-001", "PROT-ATTRIBUTION-001", "PROT-TRUTH-001"],
+    "dependencies": ["WU-OW-OFFER-001"],
+    "resource_scopes": ["crm/**"],
+    "semantic_scopes": ["revenue:lead-lifecycle"],
+    "success_criteria": [
+      "lead stages have explicit entry/exit semantics",
+      "source/campaign/landing/service/date/venue lineage is preserved",
+      "form submit, qualified lead and won contract remain distinct outcomes"
+    ],
+    "next_safe_action": "Define the minimum CRM state machine required by sales."
+  },
+  {
+    "work_unit_id": "WU-OW-ANALYTICS-001",
+    "title": "Define revenue-linked analytics event taxonomy",
+    "status": "CLAIMABLE",
+    "priority": 80,
+    "impact": 9,
+    "goal_ids": ["G-OW-1200", "G-OW-0200"],
+    "workstream_id": "WS-OW-REVENUE-001",
+    "niche_ids": ["NIC-ANALYTICS-001", "NIC-WEB-001", "NIC-CRM-001"],
+    "protect_ids": ["PROT-ATTRIBUTION-001", "PROT-PRIVACY-001", "PROT-NORTHSTAR-001"],
+    "dependencies": ["WU-OW-WEB-IA-001", "WU-OW-CRM-001"],
+    "resource_scopes": ["analytics/**"],
+    "semantic_scopes": ["measurement:revenue-funnel"],
+    "success_criteria": [
+      "events cover portfolio, film, pricing, availability and sales transitions",
+      "event names/properties have one canonical meaning",
+      "measurement can connect landing/query/campaign to qualified lead and revenue"
+    ],
+    "next_safe_action": "Map website and CRM transitions into a minimal canonical event set."
+  },
+  {
+    "work_unit_id": "WU-OW-WEB-MVP-001",
+    "title": "Ship conversion-ready indexable OASIS web MVP",
+    "status": "CLAIMABLE",
+    "priority": 78,
+    "impact": 10,
+    "goal_ids": ["G-OW-0200", "G-OW-0300", "G-OW-0500", "G-OW-0900"],
+    "workstream_id": "WS-OW-WEB-001",
+    "niche_ids": ["NIC-WEB-001", "NIC-ENGINEERING-001", "NIC-SEO-001", "NIC-PORTFOLIO-001"],
+    "protect_ids": ["PROT-SEO-001", "PROT-A11Y-001", "PROT-SECURITY-001", "PROT-ATTRIBUTION-001", "PROT-PONYTAIL-001"],
+    "dependencies": ["WU-OW-WEB-IA-001", "WU-OW-OFFER-001", "WU-OW-PORTFOLIO-001"],
+    "resource_scopes": ["src/**", "public/**", "next.config.ts", "package.json"],
+    "semantic_scopes": ["web:production-mvp"],
+    "success_criteria": [
+      "money pages render useful indexable HTML and real evidence-backed portfolio content",
+      "availability/contact conversion path works on mobile",
+      "SEO/accessibility/performance/analytics gates pass"
+    ],
+    "next_safe_action": "Reconcile and qualify the existing web-design branch against frozen IA, offer and portfolio truth."
+  },
+  {
+    "work_unit_id": "WU-OW-ADS-001",
+    "title": "Launch paid acquisition only against revenue-qualified funnel",
+    "status": "CLAIMABLE",
+    "priority": 60,
+    "impact": 8,
+    "goal_ids": ["G-OW-1100", "G-OW-1200"],
+    "workstream_id": "WS-OW-REVENUE-001",
+    "niche_ids": ["NIC-ADS-001", "NIC-ANALYTICS-001", "NIC-MARKETING-001"],
+    "protect_ids": ["PROT-NORTHSTAR-001", "PROT-ATTRIBUTION-001", "PROT-TRUTH-001"],
+    "dependencies": ["WU-OW-WEB-MVP-001", "WU-OW-CRM-001", "WU-OW-ANALYTICS-001"],
+    "resource_scopes": ["ads/**"],
+    "semantic_scopes": ["paid-acquisition:launch"],
+    "success_criteria": [
+      "campaign intent maps to dedicated relevant landing pages",
+      "qualified lead and won-contract feedback path exists",
+      "spend is not optimized merely for raw form submits"
+    ],
+    "next_safe_action": "Build high-intent Search campaigns only after conversion/CRM instrumentation is verified."
+  },
+  {
+    "work_unit_id": "WU-OW-MC-BOOTSTRAP-001",
+    "title": "Mission Control v1 runtime bootstrap",
+    "status": "COMPLETE",
+    "priority": 0,
+    "impact": 0,
+    "goal_ids": ["G-OW-1500", "G-OW-1300"],
+    "workstream_id": "WS-OW-GOV-001",
+    "niche_ids": ["NIC-QA-001", "NIC-ENGINEERING-001"],
+    "protect_ids": ["PROT-SINGLEWRITER-001", "PROT-EXACTHEAD-001", "PROT-PONYTAIL-001", "PROT-HUMAN-001"],
+    "dependencies": [],
+    "resource_scopes": ["runtime/mission_control.py", "runtime/test_mission_control.py", "runtime/agent-graph/**"],
+    "semantic_scopes": ["mission-control:runtime-v1"],
+    "success_criteria": [
+      "runtime supports next/claim/heartbeat/release/bind-team-lead",
+      "single-writer collisions and stale recovery are tested",
+      "no live Team Lead is fabricated"
+    ],
+    "next_safe_action": "Promote runtime and bind a real Team Lead session only when an actual controller is running."
+  }
+]
